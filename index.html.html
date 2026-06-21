@@ -1,0 +1,1096 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>PA-STAIR — Sociotechnical AI Readiness</title>
+<style>
+:root {
+  --purple:      #3B1463;
+  --purple-mid:  #5A2A8A;
+  --purple-light:#EDE6F5;
+  --purple-pale: #F7F3FC;
+  --teal:        #1B6B6B;
+  --teal-mid:    #2A8A8A;
+  --teal-light:  #E6F3F3;
+  --teal-pale:   #F0FAF9;
+  --mint-bg:     #EBF5F0;
+  --salmon:      #F4A8A0;
+  --yellow:      #F5E070;
+  --mint:        #8FCFC0;
+  --white:       #FFFFFF;
+  --bg:          #FAFAFA;
+  --text:        #1A1A1A;
+  --text-mid:    #444444;
+  --text-muted:  #666666;
+  --border:      #E0E0E0;
+  --border-mid:  #C8C8C8;
+  --p1: #3B1463;
+  --p2: #1B6B6B;
+  --p3: #7B3FA0;
+  --p4: #1A7A50;
+  --p5: #C05000;
+  --p6: #0A5A70;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;background:var(--white);color:var(--text);line-height:1.7;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(255,255,255,0.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 2rem;height:62px;}
+.nav-brand{display:flex;align-items:center;gap:8px;font-size:1.05rem;font-weight:800;color:var(--purple);text-decoration:none;letter-spacing:-0.3px;}
+.nav-tag{background:var(--purple);color:#fff;font-size:0.68rem;font-weight:700;padding:2px 7px;border-radius:3px;}
+.nav-links{display:flex;gap:2px;align-items:center;}
+.nav-links a{color:var(--text-muted);text-decoration:none;font-size:0.87rem;padding:6px 13px;border-radius:6px;transition:all .15s;}
+.nav-links a:hover{color:var(--purple);background:var(--purple-pale);}
+.nav-cta{background:var(--teal)!important;color:#fff!important;font-weight:600;}
+.nav-cta:hover{background:var(--teal-mid)!important;}
+.lang-btn{background:var(--purple-pale);border:1.5px solid var(--purple-light);color:var(--purple);font-size:0.8rem;font-weight:700;padding:5px 13px;border-radius:20px;cursor:pointer;transition:all .15s;letter-spacing:0.5px;}
+.lang-btn:hover{background:var(--purple-light);}
+
+/* SECTIONS */
+section{padding:96px 0;}
+.container{max-width:1100px;margin:0 auto;padding:0 2rem;}
+.section-label{font-size:0.72rem;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--teal);margin-bottom:10px;}
+h1{font-size:clamp(2rem,4.5vw,3.4rem);font-weight:800;line-height:1.1;color:var(--purple);}
+h2{font-size:clamp(1.5rem,3vw,2.2rem);font-weight:700;line-height:1.2;color:var(--purple);}
+h3{font-size:1.1rem;font-weight:700;color:var(--purple);}
+p{color:var(--text-mid);}
+
+/* HERO */
+#hero{min-height:100vh;background:linear-gradient(135deg,var(--purple-pale) 0%,var(--teal-pale) 100%);display:flex;align-items:center;padding-top:62px;position:relative;overflow:hidden;}
+#hero::before{content:'';position:absolute;top:-80px;right:-80px;width:500px;height:500px;border-radius:50%;background:linear-gradient(135deg,rgba(245,224,112,0.18),rgba(143,207,192,0.18),rgba(244,168,160,0.12));pointer-events:none;}
+.hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;}
+.hero-kicker{display:inline-flex;align-items:center;gap:7px;background:white;border:1.5px solid var(--purple-light);border-radius:100px;padding:5px 14px;margin-bottom:22px;font-size:0.78rem;font-weight:600;color:var(--purple);}
+#hero h1 em{color:var(--teal);font-style:normal;}
+#hero p{font-size:1.05rem;margin:18px 0 32px;max-width:500px;}
+.hero-ctas{display:flex;gap:10px;flex-wrap:wrap;}
+.btn{display:inline-flex;align-items:center;gap:7px;padding:11px 22px;border-radius:8px;font-weight:600;font-size:0.93rem;text-decoration:none;transition:all .2s;cursor:pointer;border:none;}
+.btn-primary{background:var(--purple);color:#fff;}
+.btn-primary:hover{background:var(--purple-mid);}
+.btn-outline{background:#fff;color:var(--teal);border:1.5px solid var(--teal);}
+.btn-outline:hover{background:var(--teal-light);}
+.flower-visual{display:flex;justify-content:center;}
+.flower-svg{width:100%;max-width:440px;}
+
+/* STATS BAR */
+.stats-bar{background:var(--mint-bg);border-top:1px solid #C8E8DC;border-bottom:1px solid #C8E8DC;padding:24px 0;}
+.stats-inner{display:flex;max-width:1100px;margin:0 auto;padding:0 2rem;}
+.stat{flex:1;text-align:center;border-right:1px solid #B8D8CE;}
+.stat:last-child{border-right:none;}
+.stat-num{font-size:1.9rem;font-weight:800;color:var(--teal);display:block;}
+.stat-label{font-size:0.8rem;color:var(--text-muted);}
+
+/* ABOUT */
+#om{background:var(--white);}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start;}
+.about-body p{margin-bottom:1.1rem;max-width:none;}
+.pill-row{display:flex;flex-wrap:wrap;gap:7px;margin-top:18px;}
+.pill{background:var(--purple-pale);border:1px solid var(--purple-light);color:var(--purple);font-size:0.8rem;padding:4px 11px;border-radius:20px;}
+.quote-block{border-left:3px solid var(--teal);padding:16px 22px;background:var(--teal-pale);border-radius:0 8px 8px 0;margin-bottom:20px;}
+.quote-block p{color:var(--text);font-style:italic;font-size:0.97rem;max-width:none;}
+.quote-block cite{display:block;margin-top:8px;font-size:0.8rem;color:var(--text-muted);font-style:normal;}
+.about-card{background:var(--purple-pale);border:1px solid var(--purple-light);border-radius:12px;padding:24px;}
+.about-card h3{margin-bottom:14px;}
+.check-item{display:flex;gap:10px;align-items:flex-start;margin-bottom:10px;}
+.check-item span:first-child{color:var(--teal);font-size:1.1rem;flex-shrink:0;line-height:1.5;}
+.check-item span:last-child{font-size:0.88rem;color:var(--text-mid);}
+
+/* PHASES */
+#faser{background:var(--bg);}
+.phases-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:44px;}
+.phase-card{background:#fff;border:1.5px solid var(--border);border-radius:12px;padding:26px;transition:border-color .2s,box-shadow .2s;}
+.phase-card:hover{border-color:var(--teal);box-shadow:0 4px 20px rgba(27,107,107,0.1);}
+.phase-num{width:34px;height:34px;border-radius:50%;background:var(--teal);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.88rem;margin-bottom:14px;}
+.phase-card h3{margin-bottom:6px;}
+.phase-subtitle{font-size:0.78rem;font-weight:700;color:var(--teal);letter-spacing:1px;text-transform:uppercase;margin-bottom:12px;}
+.phase-card p{font-size:0.9rem;max-width:none;}
+
+/* PETALS */
+#dimensioner{background:var(--white);}
+.petals-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem;margin-top:44px;}
+.petal-card{background:#fff;border:1.5px solid var(--border);border-radius:12px;overflow:hidden;transition:transform .2s,box-shadow .2s;}
+.petal-card:hover{transform:translateY(-2px);box-shadow:0 6px 24px rgba(59,20,99,0.09);}
+.petal-header{padding:18px 22px 14px;display:flex;align-items:center;gap:12px;border-top:3px solid var(--purple);}
+.petal-icon{width:42px;height:42px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:1.25rem;flex-shrink:0;background:var(--purple-pale);}
+.petal-header h3{font-size:1rem;margin-bottom:2px;}
+.petal-lang{font-size:0.75rem;color:var(--text-muted);}
+.petal-body{padding:0 22px 22px;}
+.petal-desc{font-size:0.88rem;margin-bottom:18px;max-width:none;}
+.phase-tabs{display:flex;gap:5px;margin-bottom:13px;}
+.phase-tab{font-size:0.76rem;padding:5px 11px;border-radius:6px;border:1px solid var(--border);background:transparent;color:var(--text-muted);cursor:pointer;transition:all .15s;}
+.phase-tab.active{color:#fff;border-color:transparent;background:var(--teal);}
+.phase-content{display:none;font-size:0.87rem;color:var(--text-mid);line-height:1.6;}
+.phase-content.active{display:block;}
+
+/* petal color overrides */
+.p1 .petal-header{border-top-color:var(--p1);} .p1 .petal-icon{background:rgba(59,20,99,0.08);}
+.p2 .petal-header{border-top-color:var(--p2);} .p2 .petal-icon{background:rgba(27,107,107,0.08);}
+.p3 .petal-header{border-top-color:var(--p3);} .p3 .petal-icon{background:rgba(123,63,160,0.08);}
+.p4 .petal-header{border-top-color:var(--p4);} .p4 .petal-icon{background:rgba(26,122,80,0.08);}
+.p5 .petal-header{border-top-color:var(--p5);} .p5 .petal-icon{background:rgba(192,80,0,0.08);}
+.p6 .petal-header{border-top-color:var(--p6);} .p6 .petal-icon{background:rgba(10,90,112,0.08);}
+.p1 .phase-tab.active{background:var(--p1);}
+.p2 .phase-tab.active{background:var(--p2);}
+.p3 .phase-tab.active{background:var(--p3);}
+.p4 .phase-tab.active{background:var(--p4);}
+.p5 .phase-tab.active{background:var(--p5);}
+.p6 .phase-tab.active{background:var(--p6);}
+
+/* PRACTICAL GUIDE */
+#praktisk{background:var(--bg);}
+.guide-intro p{max-width:none;margin-bottom:1rem;font-size:0.97rem;}
+.questions-accordion{display:flex;flex-direction:column;gap:10px;margin-top:40px;}
+.accordion-item{background:#fff;border:1.5px solid var(--border);border-radius:10px;overflow:hidden;}
+.accordion-trigger{width:100%;background:none;border:none;color:var(--purple);padding:16px 20px;text-align:left;cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-size:0.95rem;font-weight:600;transition:background .15s;}
+.accordion-trigger:hover{background:var(--purple-pale);}
+.accordion-trigger.open{background:var(--purple-pale);}
+.chevron{width:18px;height:18px;flex-shrink:0;transition:transform .25s;color:var(--text-muted);}
+.accordion-trigger.open .chevron{transform:rotate(180deg);}
+.accordion-body{display:none;padding:0 20px 20px;}
+.accordion-body.open{display:block;}
+.q-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-top:12px;}
+.q-phase-label{font-size:0.7rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--teal);margin-bottom:8px;}
+.q-list{list-style:none;}
+.q-list li{font-size:0.85rem;color:var(--text-mid);padding:6px 0;border-bottom:1px solid var(--border);line-height:1.5;}
+.q-list li:last-child{border-bottom:none;}
+.q-list li::before{content:'→ ';color:var(--teal);font-weight:700;}
+
+/* FACILITATION */
+#facilitering{background:var(--white);}
+.fac-intro p{max-width:none;margin-bottom:1rem;font-size:0.97rem;}
+.role-tabs{display:flex;gap:8px;margin:32px 0;}
+.role-tab-btn{padding:9px 20px;border-radius:8px;border:1.5px solid var(--border);background:#fff;color:var(--text-muted);cursor:pointer;font-size:0.88rem;font-weight:500;transition:all .2s;}
+.role-tab-btn.active{background:var(--teal);color:#fff;border-color:var(--teal);}
+.role-content{display:none;}
+.role-content.active{display:block;}
+.steps-timeline{display:flex;flex-direction:column;}
+.step{display:grid;grid-template-columns:52px 1fr;gap:22px;position:relative;}
+.step::before{content:'';position:absolute;left:25px;top:52px;bottom:0;width:2px;background:var(--border);}
+.step:last-child::before{display:none;}
+.step-num{width:52px;height:52px;border-radius:50%;background:#fff;border:2px solid var(--teal);display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--teal);font-size:1.05rem;flex-shrink:0;position:relative;z-index:1;}
+.step-body{padding-bottom:32px;}
+.step-body h3{margin-bottom:7px;}
+.step-body p{font-size:0.91rem;max-width:none;margin-bottom:10px;}
+.step-tips{background:var(--teal-pale);border:1px solid #C0E0E0;border-radius:8px;padding:13px 16px;margin-top:10px;}
+.step-tips h4{font-size:0.75rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--teal);margin-bottom:7px;}
+.step-tips ul{padding-left:16px;}
+.step-tips li{font-size:0.85rem;color:var(--text-mid);margin-bottom:4px;}
+
+/* HOW TO USE */
+#brug{background:var(--bg);}
+.use-grid{display:grid;grid-template-columns:1fr 1fr;gap:2.5rem;margin-top:44px;align-items:start;}
+.use-card{background:#fff;border:1.5px solid var(--border);border-radius:12px;padding:26px;}
+.use-card h3{margin-bottom:11px;}
+.use-card p{font-size:0.9rem;max-width:none;margin-bottom:14px;}
+.use-card ul{padding-left:16px;}
+.use-card li{font-size:0.88rem;color:var(--text-mid);margin-bottom:7px;}
+.warn-box{background:var(--purple-pale);border:1.5px solid var(--purple-light);border-radius:10px;padding:18px 20px;margin-top:20px;}
+.warn-box h4{color:var(--purple);margin-bottom:6px;font-size:0.88rem;}
+.warn-box p{font-size:0.85rem;max-width:none;}
+
+/* FOOTER */
+footer{background:var(--purple);color:rgba(255,255,255,0.75);padding:56px 0 28px;}
+.footer-inner{max-width:1100px;margin:0 auto;padding:0 2rem;}
+.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr;gap:3rem;margin-bottom:40px;}
+.footer-brand .logo{font-size:1.2rem;font-weight:800;color:#fff;margin-bottom:10px;}
+.footer-brand p{font-size:0.85rem;max-width:320px;}
+.footer-col h4{color:#fff;font-size:0.82rem;font-weight:700;margin-bottom:12px;letter-spacing:1px;text-transform:uppercase;}
+.footer-col a{display:block;color:rgba(255,255,255,0.6);text-decoration:none;font-size:0.85rem;margin-bottom:7px;transition:color .15s;}
+.footer-col a:hover{color:#fff;}
+.footer-bottom{border-top:1px solid rgba(255,255,255,0.15);padding-top:20px;display:flex;justify-content:space-between;font-size:0.8rem;}
+.triangle-deco{position:absolute;bottom:-60px;right:0;opacity:0.12;pointer-events:none;}
+
+/* ─── INTERACTIVE FRAMEWORK ─── */
+#rammevaerket{background:var(--bg);}
+.fw-layout{display:grid;grid-template-columns:210px 1fr 320px;gap:1.8rem;margin-top:44px;align-items:start;}
+.fw-phase-btns{display:flex;flex-direction:column;gap:8px;position:sticky;top:80px;}
+.fw-phase-btn{display:flex;align-items:center;gap:11px;padding:13px 14px;border-radius:10px;border:1.5px solid var(--border);background:#fff;cursor:pointer;transition:all .2s;text-align:left;width:100%;}
+.fw-phase-btn:hover{border-color:var(--teal);background:var(--teal-pale);}
+.fw-phase-btn.active{border-color:var(--teal);background:var(--teal-pale);}
+.fw-phase-dot{width:30px;height:30px;border-radius:50%;background:var(--border);color:var(--text-muted);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.83rem;flex-shrink:0;transition:all .2s;}
+.fw-phase-btn.active .fw-phase-dot{background:var(--teal);color:#fff;}
+.fw-phase-name{font-size:0.86rem;font-weight:600;color:var(--purple);}
+.fw-phase-sub{font-size:0.73rem;color:var(--text-muted);line-height:1.3;}
+.fw-legend{margin-top:18px;border-top:1px solid var(--border);padding-top:14px;}
+.fw-legend-title{font-size:0.7rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--teal);margin-bottom:9px;}
+.fw-legend-item{display:flex;align-items:center;gap:7px;margin-bottom:6px;font-size:0.77rem;color:var(--text-muted);}
+.fw-legend-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0;}
+.fw-svg-wrap{display:flex;justify-content:center;align-items:flex-start;}
+.fw-svg-wrap svg{width:100%;max-width:490px;}
+.fw-petal{transition:opacity .15s,filter .15s;cursor:pointer;}
+.fw-petal:hover{filter:brightness(1.18) drop-shadow(0 0 5px rgba(0,0,0,0.25));opacity:1!important;}
+.fw-petal.fw-selected{stroke:#fff;stroke-width:4;filter:drop-shadow(0 0 10px rgba(0,0,0,0.3));opacity:1!important;}
+.fw-panel{background:#fff;border:1.5px solid var(--border);border-radius:12px;padding:22px;position:sticky;top:80px;min-height:440px;display:flex;flex-direction:column;}
+.fw-empty{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--text-muted);text-align:center;gap:10px;font-size:0.88rem;padding:20px;}
+.fw-content{display:none;flex-direction:column;flex:1;}
+.fw-content.visible{display:flex;}
+.fw-badge{display:inline-flex;align-items:center;padding:4px 11px;border-radius:20px;font-size:0.76rem;font-weight:700;margin-bottom:12px;align-self:flex-start;}
+.fw-petal-title{font-size:1.05rem;font-weight:700;color:var(--purple);margin-bottom:3px;}
+.fw-phase-tag{font-size:0.72rem;font-weight:700;color:var(--teal);text-transform:uppercase;letter-spacing:1px;margin-bottom:12px;}
+.fw-petal-desc{font-size:0.87rem;color:var(--text-mid);line-height:1.65;margin-bottom:18px;flex:1;}
+.fw-notes-lbl{font-size:0.7rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--teal);margin-bottom:6px;}
+.fw-notes{width:100%;border:1.5px solid var(--border);border-radius:8px;padding:9px 11px;font-size:0.86rem;color:var(--text);resize:vertical;min-height:85px;font-family:inherit;transition:border-color .15s;line-height:1.55;}
+.fw-notes:focus{outline:none;border-color:var(--teal);}
+.fw-save-row{display:flex;justify-content:space-between;align-items:center;margin-top:8px;}
+.fw-save-btn{background:var(--teal);color:#fff;border:none;padding:7px 16px;border-radius:7px;font-size:0.82rem;font-weight:600;cursor:pointer;transition:background .15s;}
+.fw-save-btn:hover{background:var(--teal-mid);}
+.fw-saved{font-size:0.78rem;color:var(--teal);opacity:0;transition:opacity .3s;}
+.fw-saved.show{opacity:1;}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .hero-grid,.about-grid,.use-grid{grid-template-columns:1fr;gap:2.5rem;}
+  .phases-grid{grid-template-columns:1fr;}
+  .petals-grid{grid-template-columns:1fr;}
+  .q-grid{grid-template-columns:1fr;}
+  .footer-top{grid-template-columns:1fr;gap:2rem;}
+  .flower-visual{display:none;}
+  .fw-layout{grid-template-columns:1fr;gap:1.5rem;}
+  .fw-phase-btns{flex-direction:row;flex-wrap:wrap;position:static;}
+  .fw-phase-btn{flex:1;min-width:140px;}
+  .fw-legend{display:none;}
+  .fw-panel{position:static;}
+}
+@media(max-width:620px){
+  nav{padding:0 1rem;}
+  .nav-links{display:none;}
+  .lang-btn{font-size:0.75rem;padding:4px 10px;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-brand" href="#hero">
+    <span class="nav-tag">PA</span>STAIR
+  </a>
+  <div style="display:flex;align-items:center;gap:8px;">
+    <div class="nav-links">
+      <a href="#om" data-da="Om PA-STAIR" data-en="About">Om PA-STAIR</a>
+      <a href="#faser" data-da="Faser" data-en="Phases">Faser</a>
+      <a href="#dimensioner" data-da="Dimensioner" data-en="Dimensions">Dimensioner</a>
+      <a href="#praktisk" data-da="Praktisk Guide" data-en="Practical Guide">Praktisk Guide</a>
+      <a href="#rammevaerket" data-da="Rammeværket" data-en="Framework">Rammeværket</a>
+      <a href="#facilitering" class="nav-cta" data-da="Faciliteringsguide" data-en="Facilitation Guide">Faciliteringsguide</a>
+    </div>
+    <button class="lang-btn" id="langToggle" onclick="toggleLang()">EN</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="container">
+    <div class="hero-grid">
+      <div>
+        <div class="hero-kicker" data-da="Udviklet på IT-Universitetet i København · 2026" data-en="Developed at IT University of Copenhagen · 2026">Udviklet på IT-Universitetet i København · 2026</div>
+        <h1 data-da="Forstå din styrelses <em>AI-parathed</em> — socioteknnisk og i dybden" data-en="Understand your agency's <em>AI readiness</em> — sociotechnically and in depth">Forstå din styrelses <em>AI-parathed</em> — socioteknnisk og i dybden</h1>
+        <p data-da="PA-STAIR er et diagnostisk rammeværk til danske offentlige styrelser. Det hjælper ledere, medarbejdere og direktioner med at kortlægge, diskutere og styrke parathed til AI — på tværs af seks dimensioner og tre adoptionsfaser." data-en="PA-STAIR is a diagnostic framework for Danish public agencies. It helps managers, employees and executives map, discuss and strengthen readiness for AI — across six dimensions and three adoption phases.">PA-STAIR er et diagnostisk rammeværk til danske offentlige styrelser. Det hjælper ledere, medarbejdere og direktioner med at kortlægge, diskutere og styrke parathed til AI — på tværs af seks dimensioner og tre adoptionsfaser.</p>
+        <div class="hero-ctas">
+          <a href="#dimensioner" class="btn btn-primary" data-da="Udforsk rammeværket →" data-en="Explore the framework →">Udforsk rammeværket →</a>
+          <a href="#facilitering" class="btn btn-outline" data-da="Faciliteringsguide" data-en="Facilitation Guide">Faciliteringsguide</a>
+        </div>
+      </div>
+      <div class="flower-visual">
+        <svg class="flower-svg" viewBox="0 0 440 440" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <ellipse cx="220" cy="137" rx="46" ry="84" fill="#3B1463" fill-opacity="0.82" transform="rotate(0 220 220)"/>
+          <ellipse cx="220" cy="137" rx="46" ry="84" fill="#1B6B6B" fill-opacity="0.82" transform="rotate(60 220 220)"/>
+          <ellipse cx="220" cy="137" rx="46" ry="84" fill="#7B3FA0" fill-opacity="0.82" transform="rotate(120 220 220)"/>
+          <ellipse cx="220" cy="137" rx="46" ry="84" fill="#1A7A50" fill-opacity="0.82" transform="rotate(180 220 220)"/>
+          <ellipse cx="220" cy="137" rx="46" ry="84" fill="#C05000" fill-opacity="0.82" transform="rotate(240 220 220)"/>
+          <ellipse cx="220" cy="137" rx="46" ry="84" fill="#0A5A70" fill-opacity="0.82" transform="rotate(300 220 220)"/>
+          <circle cx="220" cy="220" r="135" stroke="rgba(59,20,99,0.08)" stroke-width="1.5" fill="none"/>
+          <circle cx="220" cy="220" r="96" stroke="rgba(59,20,99,0.1)" stroke-width="1.5" fill="none"/>
+          <circle cx="220" cy="220" r="57" stroke="rgba(59,20,99,0.12)" stroke-width="1.5" fill="none"/>
+          <circle cx="220" cy="220" r="40" fill="white"/>
+          <circle cx="220" cy="220" r="40" stroke="rgba(59,20,99,0.2)" stroke-width="1.5" fill="none"/>
+          <text x="220" y="216" text-anchor="middle" fill="#3B1463" font-size="8.5" font-weight="800" font-family="sans-serif">PA-STAIR</text>
+          <text x="220" y="228" text-anchor="middle" fill="#888" font-size="6.5" font-family="sans-serif">AI Readiness</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="stats-inner">
+    <div class="stat"><span class="stat-num">6</span><span class="stat-label" data-da="Diagnostiske dimensioner" data-en="Diagnostic dimensions">Diagnostiske dimensioner</span></div>
+    <div class="stat"><span class="stat-num">3</span><span class="stat-label" data-da="Adoptionsfaser" data-en="Adoption phases">Adoptionsfaser</span></div>
+    <div class="stat"><span class="stat-num">3</span><span class="stat-label" data-da="Deltagende styrelser" data-en="Participating agencies">Deltagende styrelser</span></div>
+    <div class="stat"><span class="stat-num">DSR</span><span class="stat-label" data-da="Design Science Research" data-en="Design Science Research">Design Science Research</span></div>
+  </div>
+</div>
+
+<!-- OM -->
+<section id="om">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-body">
+        <div class="section-label" data-da="Om rammeværket" data-en="About the framework">Om rammeværket</div>
+        <h2 data-da="Hvad er PA-STAIR?" data-en="What is PA-STAIR?">Hvad er PA-STAIR?</h2>
+        <p style="margin-top:14px;" data-da="PA-STAIR står for <strong>Public Agency — Sociotechnical AI Readiness</strong>. Det er et interaktivt, diagnostisk rammeværk, der hjælper danske offentlige styrelser med at kortlægge og styrke deres parathed til AI-adoption." data-en="PA-STAIR stands for <strong>Public Agency — Sociotechnical AI Readiness</strong>. It is an interactive, diagnostic framework that helps Danish public agencies map and strengthen their readiness for AI adoption.">PA-STAIR står for <strong>Public Agency — Sociotechnical AI Readiness</strong>. Det er et interaktivt, diagnostisk rammeværk, der hjælper danske offentlige styrelser med at kortlægge og styrke deres parathed til AI-adoption.</p>
+        <p style="margin-top:10px;" data-da="Rammeværket er <em>ikke</em> en score-model, et modenhedstjek eller en tjekliste. Det er et struktureret dialogværktøj — designet til at gøre uensartet parathed synlig på tværs af dimensioner, organisationsniveauer og adoptionsfaser." data-en="The framework is <em>not</em> a scoring model, maturity check or checklist. It is a structured dialogue tool — designed to make uneven readiness visible across dimensions, organisational levels and adoption phases.">Rammeværket er <em>ikke</em> en score-model, et modenhedstjek eller en tjekliste. Det er et struktureret dialogværktøj — designet til at gøre uensartet parathed synlig på tværs af dimensioner, organisationsniveauer og adoptionsfaser.</p>
+        <p style="margin-top:10px;" data-da="PA-STAIR er udviklet som del af et afgangsprojekt på IT-Universitetet i København (2026) med empirisk afsæt i interviews og workshops med praktikere fra Ankestyrelsen, Fødevare-, Landbrugs- og Fiskeristyrelsen samt Trafikstyrelsen." data-en="PA-STAIR was developed as part of a thesis project at IT University of Copenhagen (2026), empirically grounded in interviews and workshops with practitioners from Ankestyrelsen, FLFS and Trafikstyrelsen.">PA-STAIR er udviklet som del af et afgangsprojekt på IT-Universitetet i København (2026) med empirisk afsæt i interviews og workshops med praktikere fra Ankestyrelsen, Fødevare-, Landbrugs- og Fiskeristyrelsen samt Trafikstyrelsen.</p>
+        <div class="pill-row">
+          <span class="pill" data-da="Socioteknnisk teori" data-en="Sociotechnical theory">Socioteknnisk teori</span>
+          <span class="pill" data-da="Design Science Research" data-en="Design Science Research">Design Science Research</span>
+          <span class="pill" data-da="Dansk offentlig sektor" data-en="Danish public sector">Dansk offentlig sektor</span>
+          <span class="pill" data-da="AI-adoption" data-en="AI adoption">AI-adoption</span>
+        </div>
+      </div>
+      <div>
+        <div class="quote-block">
+          <p data-da="&ldquo;AI-ambitionerne ankommer oppefra, men den praktiske opgave — at oversætte dem til projekter, governance og ændringer i professionel praksis — er i høj grad overladt til styrelsen selv.&rdquo;" data-en="&ldquo;AI ambitions arrive from above, but the practical task — translating them into projects, governance and changes in professional practice — is largely left to the agency itself.&rdquo;">&ldquo;AI-ambitionerne ankommer oppefra, men den praktiske opgave — at oversætte dem til projekter, governance og ændringer i professionel praksis — er i høj grad overladt til styrelsen selv.&rdquo;</p>
+          <cite data-da="— Fra empirisk materiale, PA-STAIR-specialet, ITU 2026" data-en="— From empirical material, PA-STAIR thesis, ITU 2026">— Fra empirisk materiale, PA-STAIR-specialet, ITU 2026</cite>
+        </div>
+        <div class="about-card">
+          <h3 data-da="Hvad gør PA-STAIR unikt?" data-en="What makes PA-STAIR unique?">Hvad gør PA-STAIR unikt?</h3>
+          <div class="check-item"><span>✓</span><span data-da="Kombinerer juridiske, organisatoriske og menneskelige dimensioner i ét samlet billede" data-en="Combines legal, organisational and human dimensions into one coherent picture">Kombinerer juridiske, organisatoriske og menneskelige dimensioner i ét samlet billede</span></div>
+          <div class="check-item"><span>✓</span><span data-da="Anerkender at parathed er uensartet — en styrelse kan være i Analyse på jura men Udforskning på medarbejdere" data-en="Acknowledges that readiness is uneven — an agency can be in Analysis on legal while in Exploration on workforce">Anerkender at parathed er uensartet — en styrelse kan være i Analyse på jura men Udforskning på medarbejdere</span></div>
+          <div class="check-item"><span>✓</span><span data-da="Designet til dialog og fælles refleksion — ikke til individuel udfyldning" data-en="Designed for dialogue and joint reflection — not for individual completion">Designet til dialog og fælles refleksion — ikke til individuel udfyldning</span></div>
+          <div class="check-item"><span>✓</span><span data-da="Grundet i dansk offentlig kontekst og valideret med praktikererfaring" data-en="Grounded in the Danish public sector context and validated with practitioner experience">Grundet i dansk offentlig kontekst og valideret med praktikererfaring</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PHASES -->
+<section id="faser">
+  <div class="container">
+    <div class="section-label" data-da="Rammeværkets struktur" data-en="Framework structure">Rammeværkets struktur</div>
+    <h2 data-da="De tre adoptionsfaser" data-en="The three adoption phases">De tre adoptionsfaser</h2>
+    <p style="margin-top:10px;" data-da="Faserne er ikke en modenhedsstige — de er positioner, der hjælper med at placere en konkret AI-indsats. En styrelse kan befinde sig i forskellige faser på tværs af de seks dimensioner." data-en="The phases are not a maturity ladder — they are positions that help locate a specific AI initiative. An agency may be in different phases across the six dimensions.">Faserne er ikke en modenhedsstige — de er positioner, der hjælper med at placere en konkret AI-indsats. En styrelse kan befinde sig i forskellige faser på tværs af de seks dimensioner.</p>
+    <div class="phases-grid">
+      <div class="phase-card">
+        <div class="phase-num">1</div>
+        <div class="phase-subtitle" data-da="Udforskning" data-en="Exploration">Udforskning</div>
+        <h3 data-da="At gøre AI tilgængeligt" data-en="Making AI available">At gøre AI tilgængeligt</h3>
+        <p style="margin-top:8px;" data-da="AI tilgås som en mulighed — ikke en etableret praksis. Fasen kendetegnes af nysgerrighed, lokal eksperimentering, leverandørdemonstration, proof-of-concept og tidlig identifikation af use cases." data-en="AI is approached as a possibility rather than an established practice. The phase is characterised by curiosity, local experimentation, vendor demonstrations, proofs-of-concept and early identification of use cases.">AI tilgås som en mulighed — ikke en etableret praksis. Fasen kendetegnes af nysgerrighed, lokal eksperimentering, leverandørdemonstration, proof-of-concept og tidlig identifikation af use cases.</p>
+      </div>
+      <div class="phase-card">
+        <div class="phase-num">2</div>
+        <div class="phase-subtitle" data-da="Analyse" data-en="Analysis">Analyse</div>
+        <h3 data-da="At gøre AI meningsfuldt" data-en="Making AI meaningful">At gøre AI meningsfuldt</h3>
+        <p style="margin-top:8px;" data-da="Arbejdet skifter fra at møde AI til at undersøge det. Use cases granskes, governance-spørgsmål rejses, datagrundlag undersøges, juridiske fortolkninger indhentes og alignment med faglig praksis testes." data-en="Work shifts from encountering AI to scrutinising it. Use cases are examined, governance questions raised, data foundations assessed, legal interpretations sought and alignment with professional practice tested.">Arbejdet skifter fra at møde AI til at undersøge det. Use cases granskes, governance-spørgsmål rejses, datagrundlag undersøges, juridiske fortolkninger indhentes og alignment med faglig praksis testes.</p>
+      </div>
+      <div class="phase-card">
+        <div class="phase-num">3</div>
+        <div class="phase-subtitle" data-da="Adoption" data-en="Adoption">Adoption</div>
+        <h3 data-da="At gøre AI forankret" data-en="Making AI embedded">At gøre AI forankret</h3>
+        <p style="margin-top:8px;" data-da="AI bevæger sig fra projekt til praksis. Det bliver en del af workflows, rollestrukturer, overdragelser og institutionelle rutiner. Fasen handler om bæredygtig drift over tid." data-en="AI moves from project to practice. It becomes part of workflows, role arrangements, handovers and institutional routines. The phase concerns sustainable operation over time.">AI bevæger sig fra projekt til praksis. Det bliver en del af workflows, rollestrukturer, overdragelser og institutionelle rutiner. Fasen handler om bæredygtig drift over tid.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PETALS -->
+<section id="dimensioner">
+  <div class="container">
+    <div class="section-label" data-da="De seks diagnostiske dimensioner" data-en="The six diagnostic dimensions">De seks diagnostiske dimensioner</div>
+    <h2 data-da="Rammeværkets seks kronblade" data-en="The framework's six petals">Rammeværkets seks kronblade</h2>
+    <p style="margin-top:10px;" data-da="Hvert kronblad er et diagnostisk tema. Vælg en fase for at se, hvad der er karakteristisk i netop den position." data-en="Each petal is a diagnostic theme. Select a phase to see what is characteristic in that position.">Hvert kronblad er et diagnostisk tema. Vælg en fase for at se, hvad der er karakteristisk i netop den position.</p>
+    <div class="petals-grid">
+
+      <div class="petal-card p1">
+        <div class="petal-header">
+          <div class="petal-icon">⚖️</div>
+          <div><h3 data-da="Jura &amp; Compliance" data-en="Legal &amp; Compliance">Jura &amp; Compliance</h3><div class="petal-lang">Legal &amp; Compliance</div></div>
+        </div>
+        <div class="petal-body">
+          <p class="petal-desc" data-da="Adresserer de juridiske rammer AI skal operere inden for: GDPR, EU AI Act, sektorspecifik lovgivning og styrelsens fortolkningspraksis for, hvad der er tilladt." data-en="Addresses the legal frameworks within which AI must operate: GDPR, the EU AI Act, sector-specific legislation and the agency's interpretive practice around what is permitted.">Adresserer de juridiske rammer AI skal operere inden for: GDPR, EU AI Act, sektorspecifik lovgivning og styrelsens fortolkningspraksis for, hvad der er tilladt.</p>
+          <div class="phase-tabs">
+            <button class="phase-tab active" onclick="switchTab(this,'p1','e')" data-da="Udforskning" data-en="Exploration">Udforskning</button>
+            <button class="phase-tab" onclick="switchTab(this,'p1','a')" data-da="Analyse" data-en="Analysis">Analyse</button>
+            <button class="phase-tab" onclick="switchTab(this,'p1','d')" data-da="Adoption" data-en="Adoption">Adoption</button>
+          </div>
+          <div class="phase-content active" data-petal="p1" data-phase="e" data-da="Identificering af, hvilke juridiske spørgsmål et givet use case vil rejse, og indhentning af en foreløbig juridisk vurdering — uden at lukke prematurt for eksperimentering." data-en="Identifying which legal questions a given use case will raise and obtaining a preliminary legal reading — without prematurely closing the space for experimentation.">Identificering af, hvilke juridiske spørgsmål et givet use case vil rejse, og indhentning af en foreløbig juridisk vurdering — uden at lukke prematurt for eksperimentering.</div>
+          <div class="phase-content" data-petal="p1" data-phase="a" data-da="Substantiel juridisk vurdering: DPIA, klassificering under EU AI Act, afklaring af behandlingsgrundlag og alignment med sektorlovgivning." data-en="Substantive legal assessment: DPIA, classification under the EU AI Act, clarification of processing bases and alignment with sector law.">Substantiel juridisk vurdering: DPIA, klassificering under EU AI Act, afklaring af behandlingsgrundlag og alignment med sektorlovgivning.</div>
+          <div class="phase-content" data-petal="p1" data-phase="d" data-da="Løbende forpligtelse: vedligeholdelse af audit trails, monitorering af modeller mod juridiske forpligtelser og opdatering af dokumentation i takt med lovgivningsudviklingen." data-en="Continuous obligation: maintaining audit trails, monitoring models against legal commitments and updating documentation as legislation evolves.">Løbende forpligtelse: vedligeholdelse af audit trails, monitorering af modeller mod juridiske forpligtelser og opdatering af dokumentation i takt med lovgivningsudviklingen.</div>
+        </div>
+      </div>
+
+      <div class="petal-card p2">
+        <div class="petal-header">
+          <div class="petal-icon">🤝</div>
+          <div><h3 data-da="Ekstern Enablement" data-en="External Enablement">Ekstern Enablement</h3><div class="petal-lang">External Enablement</div></div>
+        </div>
+        <div class="petal-body">
+          <p class="petal-desc" data-da="Indfanger styrelsens relation til leverandører, konsulenter, tværgående initiativer og det bredere offentlige AI-landskab, der gør AI-adoption mulig." data-en="Captures the agency's relationship with vendors, consultants, cross-agency initiatives and the wider public sector AI landscape that make AI adoption possible.">Indfanger styrelsens relation til leverandører, konsulenter, tværgående initiativer og det bredere offentlige AI-landskab, der gør AI-adoption mulig.</p>
+          <div class="phase-tabs">
+            <button class="phase-tab active" onclick="switchTab(this,'p2','e')" data-da="Udforskning" data-en="Exploration">Udforskning</button>
+            <button class="phase-tab" onclick="switchTab(this,'p2','a')" data-da="Analyse" data-en="Analysis">Analyse</button>
+            <button class="phase-tab" onclick="switchTab(this,'p2','d')" data-da="Adoption" data-en="Adoption">Adoption</button>
+          </div>
+          <div class="phase-content active" data-petal="p2" data-phase="e" data-da="Adgang til ekspertise, brug af eksternt proof-of-concept og læring fra kollega-styrelser — uden at blive låst til én leverandør eller paradigme." data-en="Accessing expertise, drawing on external proof-of-concept and learning from peer agencies — without becoming locked into a single supplier or paradigm.">Adgang til ekspertise, brug af eksternt proof-of-concept og læring fra kollega-styrelser — uden at blive låst til én leverandør eller paradigme.</div>
+          <div class="phase-content" data-petal="p2" data-phase="a" data-da="Bevidst håndtering af afhængigheder: strukturering af leverandørrelationer så viden overføres indad, og vurdering af om eksterne tilbud passer til konteksten." data-en="Deliberate management of dependencies: structuring vendor relationships so knowledge transfers inwards and assessing whether external offers fit the context.">Bevidst håndtering af afhængigheder: strukturering af leverandørrelationer så viden overføres indad, og vurdering af om eksterne tilbud passer til konteksten.</div>
+          <div class="phase-content" data-petal="p2" data-phase="d" data-da="Holdbarhed af eksterne arrangementer: håndtering af modelopdateringer fra leverandører, opretholdelse af tværgående samarbejde og tilstrækkelig intern kompetence." data-en="Durability of external arrangements: managing model updates from vendors, sustaining cross-agency collaboration and retaining sufficient internal competence.">Holdbarhed af eksterne arrangementer: håndtering af modelopdateringer fra leverandører, opretholdelse af tværgående samarbejde og tilstrækkelig intern kompetence.</div>
+        </div>
+      </div>
+
+      <div class="petal-card p3">
+        <div class="petal-header">
+          <div class="petal-icon">🏛️</div>
+          <div><h3 data-da="Governance &amp; Legitimitet" data-en="Governance &amp; Legitimacy">Governance &amp; Legitimitet</h3><div class="petal-lang">Governance &amp; Legitimacy</div></div>
+        </div>
+        <div class="petal-body">
+          <p class="petal-desc" data-da="Vedrører de strukturer, mandater og beslutningsrettigheder, der gør det muligt at handle på AI-initiativer som legitime udøvelser af offentlig myndighed." data-en="Concerns the structures, mandates and decision rights that allow AI initiatives to be acted on as legitimate exercises of public authority.">Vedrører de strukturer, mandater og beslutningsrettigheder, der gør det muligt at handle på AI-initiativer som legitime udøvelser af offentlig myndighed.</p>
+          <div class="phase-tabs">
+            <button class="phase-tab active" onclick="switchTab(this,'p3','e')" data-da="Udforskning" data-en="Exploration">Udforskning</button>
+            <button class="phase-tab" onclick="switchTab(this,'p3','a')" data-da="Analyse" data-en="Analysis">Analyse</button>
+            <button class="phase-tab" onclick="switchTab(this,'p3','d')" data-da="Adoption" data-en="Adoption">Adoption</button>
+          </div>
+          <div class="phase-content active" data-petal="p3" data-phase="e" data-da="Eksistensen af et forum, hvor AI-idéer kan fremsættes, prioriteres og sanktioneres tidligt — så udforskning hverken undertrykkes eller afkobles fra ansvarlighed." data-en="Existence of a forum where AI ideas can be surfaced, prioritised and sanctioned early — so exploration is neither suppressed nor decoupled from accountability.">Eksistensen af et forum, hvor AI-idéer kan fremsættes, prioriteres og sanktioneres tidligt — så udforskning hverken undertrykkes eller afkobles fra ansvarlighed.</div>
+          <div class="phase-content" data-petal="p3" data-phase="a" data-da="Afklaring af beslutningsrettigheder, rollefordelinger, eskaleringsvejer og de kriterier, som AI-initiativer vurderes efter." data-en="Clarifying decision rights, role allocations, escalation paths and the criteria against which AI initiatives will be assessed.">Afklaring af beslutningsrettigheder, rollefordelinger, eskaleringsvejer og de kriterier, som AI-initiativer vurderes efter.</div>
+          <div class="phase-content" data-petal="p3" data-phase="d" data-da="Fortsat produktion af legitimitet i drift: tilsyn, transparens over for borgere og medarbejdere og institutionel troværdighed af styrelsens AI-praksis over tid." data-en="Continued production of legitimacy in operation: oversight, transparency towards citizens and staff and institutional credibility of the agency's AI practice over time.">Fortsat produktion af legitimitet i drift: tilsyn, transparens over for borgere og medarbejdere og institutionel troværdighed af styrelsens AI-praksis over tid.</div>
+        </div>
+      </div>
+
+      <div class="petal-card p4">
+        <div class="petal-header">
+          <div class="petal-icon">👥</div>
+          <div><h3 data-da="Mobilisering af Arbejdsstyrken" data-en="Workforce Mobilisation">Mobilisering af Arbejdsstyrken</h3><div class="petal-lang">Workforce Mobilisation</div></div>
+        </div>
+        <div class="petal-body">
+          <p class="petal-desc" data-da="Adresserer aktiveringen af medarbejdere, frontløbere, mellemledere og styregrupper, hvis engagement afgør om AI-adoptionen vinder momentum." data-en="Addresses the activation of staff, frontrunners, middle managers and steering groups whose engagement determines whether AI adoption gains traction.">Adresserer aktiveringen af medarbejdere, frontløbere, mellemledere og styregrupper, hvis engagement afgør om AI-adoptionen vinder momentum.</p>
+          <div class="phase-tabs">
+            <button class="phase-tab active" onclick="switchTab(this,'p4','e')" data-da="Udforskning" data-en="Exploration">Udforskning</button>
+            <button class="phase-tab" onclick="switchTab(this,'p4','a')" data-da="Analyse" data-en="Analysis">Analyse</button>
+            <button class="phase-tab" onclick="switchTab(this,'p4','d')" data-da="Adoption" data-en="Adoption">Adoption</button>
+          </div>
+          <div class="phase-content active" data-petal="p4" data-phase="e" data-da="Identifikation og beskyttelse af frontløbere, rum for nysgerrighedsdrevet engagement og skabelse af første berøringspunkter mellem medarbejdere og AI." data-en="Identifying and protecting frontrunners, allowing space for curiosity-driven engagement and creating initial points of contact between staff and AI.">Identifikation og beskyttelse af frontløbere, rum for nysgerrighedsdrevet engagement og skabelse af første berøringspunkter mellem medarbejdere og AI.</div>
+          <div class="phase-content" data-petal="p4" data-phase="a" data-da="Bevidst opbygning af kompetencer: uddannelse, rolledesign, inddragelse af faggrupper i use case-vurdering og kultivering af opbakning på tværs af hierarkiske niveauer." data-en="Deliberate building of competence: training, role design, involvement of professional groups in use case assessment and cultivating buy-in across hierarchical levels.">Bevidst opbygning af kompetencer: uddannelse, rolledesign, inddragelse af faggrupper i use case-vurdering og kultivering af opbakning på tværs af hierarkiske niveauer.</div>
+          <div class="phase-content" data-petal="p4" data-phase="d" data-da="Holdbarhed af arbejdsstyrkens dimension: løbende læring, succession af ekspertise, integration af AI-kompetencer i stillingsbeskrivelser og opretholdelse af faglig identitet." data-en="Sustainability of the workforce dimension: ongoing learning, succession of expertise, integration of AI competence into job descriptions and maintenance of professional identity.">Holdbarhed af arbejdsstyrkens dimension: løbende læring, succession af ekspertise, integration af AI-kompetencer i stillingsbeskrivelser og opretholdelse af faglig identitet.</div>
+        </div>
+      </div>
+
+      <div class="petal-card p5">
+        <div class="petal-header">
+          <div class="petal-icon">🔍</div>
+          <div><h3 data-da="Meningsdannelse &amp; Oversættelse" data-en="Sensemaking &amp; Translation">Meningsdannelse &amp; Oversættelse</h3><div class="petal-lang">Sensemaking &amp; Translation</div></div>
+        </div>
+        <div class="petal-body">
+          <p class="petal-desc" data-da="Vedrører det fortolkende arbejde, gennem hvilket AI bliver meningsfuldt i en specifik professionel og organisatorisk kontekst — ikke bare teknisk muligt." data-en="Concerns the interpretive work through which AI becomes meaningful within a specific professional and organisational context — not merely technically possible.">Vedrører det fortolkende arbejde, gennem hvilket AI bliver meningsfuldt i en specifik professionel og organisatorisk kontekst — ikke bare teknisk muligt.</p>
+          <div class="phase-tabs">
+            <button class="phase-tab active" onclick="switchTab(this,'p5','e')" data-da="Udforskning" data-en="Exploration">Udforskning</button>
+            <button class="phase-tab" onclick="switchTab(this,'p5','a')" data-da="Analyse" data-en="Analysis">Analyse</button>
+            <button class="phase-tab" onclick="switchTab(this,'p5','d')" data-da="Adoption" data-en="Adoption">Adoption</button>
+          </div>
+          <div class="phase-content active" data-petal="p5" data-phase="e" data-da="Artikulering af hvad AI kan betyde for styrelsens mandat, invitere faggrupper ind i samtalen og synliggøre tavse antagelser om, hvad AI bør og ikke bør gøre." data-en="Articulating what AI might mean for the agency's mandate, inviting professional groups into the conversation and surfacing tacit assumptions about what AI should and should not do.">Artikulering af hvad AI kan betyde for styrelsens mandat, invitere faggrupper ind i samtalen og synliggøre tavse antagelser om, hvad AI bør og ikke bør gøre.</div>
+          <div class="phase-content" data-petal="p5" data-phase="a" data-da="Aktiv oversættelse af AI-kapabiliteter til specifikke faglige praksisser: test af, hvordan AI-output læses og bruges, og identifikation af, hvor automatisering understøtter fagligt skøn." data-en="Active translation of AI capabilities into specific professional practices: testing how AI outputs are read and used and identifying where automation supports professional judgement.">Aktiv oversættelse af AI-kapabiliteter til specifikke faglige praksisser: test af, hvordan AI-output læses og bruges, og identifikation af, hvor automatisering understøtter fagligt skøn.</div>
+          <div class="phase-content" data-petal="p5" data-phase="d" data-da="Opretholdelse af mening over tid: sikring af at AI fortsat giver mening efterhånden som sager, medarbejdere og kontekster udvikler sig — og at fortolkningsmæssig drift erkendes og håndteres." data-en="Maintenance of meaning over time: ensuring AI continues to make sense as cases, staff and contexts evolve — and that interpretive drift is recognised and addressed.">Opretholdelse af mening over tid: sikring af at AI fortsat giver mening efterhånden som sager, medarbejdere og kontekster udvikler sig — og at fortolkningsmæssig drift erkendes og håndteres.</div>
+        </div>
+      </div>
+
+      <div class="petal-card p6">
+        <div class="petal-header">
+          <div class="petal-icon">⚙️</div>
+          <div><h3 data-da="Socioteknnisk Forankring" data-en="Sociotechnical Embedding">Socioteknnisk Forankring</h3><div class="petal-lang">Sociotechnical Embedding</div></div>
+        </div>
+        <div class="petal-body">
+          <p class="petal-desc" data-da="Adresserer integrationen af AI i konkrete workflows, rollearrangementer, overdragelser og kontrolstrukturer — testen på om det sociale og tekniske er korrekt optimeret i fællesskab." data-en="Addresses the integration of AI into concrete workflows, role arrangements, handovers and control structures — the test of whether the social and technical have been jointly optimised.">Adresserer integrationen af AI i konkrete workflows, rollearrangementer, overdragelser og kontrolstrukturer — testen på om det sociale og tekniske er korrekt optimeret i fællesskab.</p>
+          <div class="phase-tabs">
+            <button class="phase-tab active" onclick="switchTab(this,'p6','e')" data-da="Udforskning" data-en="Exploration">Udforskning</button>
+            <button class="phase-tab" onclick="switchTab(this,'p6','a')" data-da="Analyse" data-en="Analysis">Analyse</button>
+            <button class="phase-tab" onclick="switchTab(this,'p6','d')" data-da="Adoption" data-en="Adoption">Adoption</button>
+          </div>
+          <div class="phase-content active" data-petal="p6" data-phase="e" data-da="Kortlægning af eksisterende workflows og identifikation af punkter, hvor AI kan indsættes uden at forstyrre essentielt fagligt skøn." data-en="Mapping current workflows and identifying points where AI might be inserted without disrupting essential professional judgement.">Kortlægning af eksisterende workflows og identifikation af punkter, hvor AI kan indsættes uden at forstyrre essentielt fagligt skøn.</div>
+          <div class="phase-content" data-petal="p6" data-phase="a" data-da="Bevidst design af det socioteknniske system: hvordan opgaver omfordeles mellem mennesker og AI, hvordan overdragelser struktureres, og hvordan undtagelser håndteres." data-en="Deliberate design of the sociotechnical system: how tasks are redistributed between humans and AI, how handovers are structured and how exceptions are handled.">Bevidst design af det socioteknniske system: hvordan opgaver omfordeles mellem mennesker og AI, hvordan overdragelser struktureres, og hvordan undtagelser håndteres.</div>
+          <div class="phase-content" data-petal="p6" data-phase="d" data-da="Holdbarhed af forankringen: om arrangementet holder under driftsbelastning, om feedback-loops fungerer, og om styrelsen kan tilpasse sig refleksivt." data-en="Durability of embedding: whether the arrangement holds under operational load, whether feedback loops are functioning and whether the agency can adapt reflexively.">Holdbarhed af forankringen: om arrangementet holder under driftsbelastning, om feedback-loops fungerer, og om styrelsen kan tilpasse sig refleksivt.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PRACTICAL GUIDE -->
+<section id="praktisk">
+  <div class="container">
+    <div class="section-label" data-da="Fra teori til praksis" data-en="From theory to practice">Fra teori til praksis</div>
+    <h2 data-da="Praktisk guide: spørgsmål til hvert kronblad" data-en="Practical guide: questions for each petal">Praktisk guide: spørgsmål til hvert kronblad</h2>
+    <div class="guide-intro" style="margin-top:12px;">
+      <p data-da="Denne guide oversætter de seks dimensioner til konkrete spørgsmål til brug i dialog. Start med det use case I arbejder med og gå kronbladene igennem ét ad gangen." data-en="This guide translates the six dimensions into concrete questions for use in dialogue. Start with the use case you are working with and work through the petals one at a time.">Denne guide oversætter de seks dimensioner til konkrete spørgsmål til brug i dialog. Start med det use case I arbejder med og gå kronbladene igennem ét ad gangen.</p>
+    </div>
+    <div class="questions-accordion">
+
+      <div class="accordion-item">
+        <button class="accordion-trigger" onclick="toggleAccordion(this)">
+          <span data-da="⚖️ &nbsp;Jura &amp; Compliance" data-en="⚖️ &nbsp;Legal &amp; Compliance">⚖️ &nbsp;Jura &amp; Compliance</span>
+          <svg class="chevron" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+        </button>
+        <div class="accordion-body">
+          <div class="q-grid">
+            <div><div class="q-phase-label" data-da="Udforskning" data-en="Exploration">Udforskning</div><ul class="q-list">
+              <li data-da="Hvilke juridiske spørgsmål rejser dette use case umiddelbart?" data-en="What legal questions does this use case immediately raise?">Hvilke juridiske spørgsmål rejser dette use case umiddelbart?</li>
+              <li data-da="Hvem kan give en foreløbig juridisk vurdering?" data-en="Who can provide a preliminary legal assessment?">Hvem kan give en foreløbig juridisk vurdering?</li>
+              <li data-da="Hvad ved vi ikke juridisk endnu — er det et showstopper?" data-en="What don't we know legally yet — is it a showstopper?">Hvad ved vi ikke juridisk endnu — er det et showstopper?</li>
+            </ul></div>
+            <div><div class="q-phase-label" data-da="Analyse" data-en="Analysis">Analyse</div><ul class="q-list">
+              <li data-da="Er der foretaget en DPIA? Hvad viser den?" data-en="Has a DPIA been conducted? What does it show?">Er der foretaget en DPIA? Hvad viser den?</li>
+              <li data-da="Hvordan klassificeres systemet under EU AI Act?" data-en="How is the system classified under the EU AI Act?">Hvordan klassificeres systemet under EU AI Act?</li>
+              <li data-da="Hvad er behandlingsgrundlaget for de data AI skal anvende?" data-en="What is the processing basis for the data AI will use?">Hvad er behandlingsgrundlaget for de data AI skal anvende?</li>
+              <li data-da="Hvem har ansvaret, hvis systemet tager fejl?" data-en="Who is responsible if the system makes an error?">Hvem har ansvaret, hvis systemet tager fejl?</li>
+            </ul></div>
+            <div><div class="q-phase-label" data-da="Adoption" data-en="Adoption">Adoption</div><ul class="q-list">
+              <li data-da="Hvem overvåger løbende, at systemet overholder lovgivningen?" data-en="Who continuously monitors that the system complies with the law?">Hvem overvåger løbende, at systemet overholder lovgivningen?</li>
+              <li data-da="Hvordan håndterer vi ændringer i EU AI Act eller GDPR?" data-en="How do we handle changes to EU AI Act or GDPR?">Hvordan håndterer vi ændringer i EU AI Act eller GDPR?</li>
+              <li data-da="Kan vi forsvare systemets beslutninger over for borgere og tilsyn?" data-en="Can we defend the system's decisions to citizens and supervisors?">Kan vi forsvare systemets beslutninger over for borgere og tilsyn?</li>
+            </ul></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-trigger" onclick="toggleAccordion(this)">
+          <span data-da="🤝 &nbsp;Ekstern Enablement" data-en="🤝 &nbsp;External Enablement">🤝 &nbsp;Ekstern Enablement</span>
+          <svg class="chevron" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+        </button>
+        <div class="accordion-body">
+          <div class="q-grid">
+            <div><div class="q-phase-label" data-da="Udforskning" data-en="Exploration">Udforskning</div><ul class="q-list">
+              <li data-da="Hvilke leverandører er vi i kontakt med?" data-en="Which vendors are we in contact with?">Hvilke leverandører er vi i kontakt med?</li>
+              <li data-da="Hvad lærer vi fra andre styrelsers erfaringer?" data-en="What are we learning from other agencies' experiences?">Hvad lærer vi fra andre styrelsers erfaringer?</li>
+              <li data-da="Er vi afhængige af én leverandørs fortælling om AI?" data-en="Are we dependent on one vendor's narrative about AI?">Er vi afhængige af én leverandørs fortælling om AI?</li>
+            </ul></div>
+            <div><div class="q-phase-label" data-da="Analyse" data-en="Analysis">Analyse</div><ul class="q-list">
+              <li data-da="Overfører kontrakten viden indad i organisationen?" data-en="Does the contract transfer knowledge inward?">Overfører kontrakten viden indad i organisationen?</li>
+              <li data-da="Er vi afhængige af ekstern ekspertise, vi ikke kan erstatte?" data-en="Are we dependent on external expertise we cannot replace?">Er vi afhængige af ekstern ekspertise, vi ikke kan erstatte?</li>
+              <li data-da="Hvad sker der, hvis leverandøren ændrer priser eller vilkår?" data-en="What happens if the vendor changes prices or terms?">Hvad sker der, hvis leverandøren ændrer priser eller vilkår?</li>
+            </ul></div>
+            <div><div class="q-phase-label" data-da="Adoption" data-en="Adoption">Adoption</div><ul class="q-list">
+              <li data-da="Har vi intern kompetence til at evaluere leverandørens opdateringer?" data-en="Do we have internal competence to evaluate vendor updates?">Har vi intern kompetence til at evaluere leverandørens opdateringer?</li>
+              <li data-da="Kan vi skifte leverandør uden at miste kritisk viden?" data-en="Can we change vendor without losing critical knowledge?">Kan vi skifte leverandør uden at miste kritisk viden?</li>
+            </ul></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-trigger" onclick="toggleAccordion(this)">
+          <span data-da="🏛️ &nbsp;Governance &amp; Legitimitet" data-en="🏛️ &nbsp;Governance &amp; Legitimacy">🏛️ &nbsp;Governance &amp; Legitimitet</span>
+          <svg class="chevron" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+        </button>
+        <div class="accordion-body">
+          <div class="q-grid">
+            <div><div class="q-phase-label" data-da="Udforskning" data-en="Exploration">Udforskning</div><ul class="q-list">
+              <li data-da="Er der et forum, hvor AI-idéer kan fremsættes og prioriteres?" data-en="Is there a forum where AI ideas can be surfaced and prioritised?">Er der et forum, hvor AI-idéer kan fremsættes og prioriteres?</li>
+              <li data-da="Hvem kan give grønt lys til at eksperimentere?" data-en="Who can give the green light to experiment?">Hvem kan give grønt lys til at eksperimentere?</li>
+              <li data-da="Er AI på agendaen i ledelsesgruppen?" data-en="Is AI on the management group's agenda?">Er AI på agendaen i ledelsesgruppen?</li>
+            </ul></div>
+            <div><div class="q-phase-label" data-da="Analyse" data-en="Analysis">Analyse</div><ul class="q-list">
+              <li data-da="Hvem beslutter om vi går videre med dette use case?" data-en="Who decides whether we proceed with this use case?">Hvem beslutter om vi går videre med dette use case?</li>
+              <li data-da="Er det klart hvem der har ansvaret — juridisk og organisatorisk?" data-en="Is it clear who is responsible — legally and organisationally?">Er det klart hvem der har ansvaret — juridisk og organisatorisk?</li>
+              <li data-da="Involveres medarbejderrepræsentanter og tillidsfolk?" data-en="Are employee representatives and union reps involved?">Involveres medarbejderrepræsentanter og tillidsfolk?</li>
+            </ul></div>
+            <div><div class="q-phase-label" data-da="Adoption" data-en="Adoption">Adoption</div><ul class="q-list">
+              <li data-da="Hvem fører løbende tilsyn med AI-systemet i drift?" data-en="Who continuously oversees the AI system in operation?">Hvem fører løbende tilsyn med AI-systemet i drift?</li>
+              <li data-da="Er styrelsens AI-praksis troværdig over for Datatilsynet?" data-en="Is the agency's AI practice credible to the Data Protection Authority?">Er styrelsens AI-praksis troværdig over for Datatilsynet?</li>
+            </ul></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-trigger" onclick="toggleAccordion(this)">
+          <span data-da="👥 &nbsp;Mobilisering af Arbejdsstyrken" data-en="👥 &nbsp;Workforce Mobilisation">👥 &nbsp;Mobilisering af Arbejdsstyrken</span>
+          <svg class="chevron" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+        </button>
+        <div class="accordion-body">
+          <div class="q-grid">
+            <div><div class="q-phase-label" data-da="Udforskning" data-en="Exploration">Udforskning</div><ul class="q-list">
+              <li data-da="Hvem er allerede nysgerrige på AI i organisationen?" data-en="Who is already curious about AI in the organisation?">Hvem er allerede nysgerrige på AI i organisationen?</li>
+              <li data-da="Er der frontløbere vi kan bygge videre på?" data-en="Are there frontrunners we can build on?">Er der frontløbere vi kan bygge videre på?</li>
+              <li data-da="Er der frygt eller modstand — hvad driver den?" data-en="Is there fear or resistance — what drives it?">Er der frygt eller modstand — hvad driver den?</li>
+            </ul></div>
+            <div><div class="q-phase-label" data-da="Analyse" data-en="Analysis">Analyse</div><ul class="q-list">
+              <li data-da="Hvilke kompetencer mangler vi konkret?" data-en="What specific competences are we missing?">Hvilke kompetencer mangler vi konkret?</li>
+              <li data-da="Involveres de fagprofessionelle, der skal bruge AI, i designet?" data-en="Are the professionals who will use AI involved in the design?">Involveres de fagprofessionelle, der skal bruge AI, i designet?</li>
+              <li data-da="Er mellemlederne klædt på til at lede forandringen?" data-en="Are middle managers equipped to lead the change?">Er mellemlederne klædt på til at lede forandringen?</li>
+            </ul></div>
+            <div><div class="q-phase-label" data-da="Adoption" data-en="Adoption">Adoption</div><ul class="q-list">
+              <li data-da="Er AI-kompetencer skrevet ind i stillingsbeskrivelser?" data-en="Are AI competences written into job descriptions?">Er AI-kompetencer skrevet ind i stillingsbeskrivelser?</li>
+              <li data-da="Trives medarbejderne med at arbejde med AI?" data-en="Are staff thriving in working with AI?">Trives medarbejderne med at arbejde med AI?</li>
+            </ul></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-trigger" onclick="toggleAccordion(this)">
+          <span data-da="🔍 &nbsp;Meningsdannelse &amp; Oversættelse" data-en="🔍 &nbsp;Sensemaking &amp; Translation">🔍 &nbsp;Meningsdannelse &amp; Oversættelse</span>
+          <svg class="chevron" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+        </button>
+        <div class="accordion-body">
+          <div class="q-grid">
+            <div><div class="q-phase-label" data-da="Udforskning" data-en="Exploration">Udforskning</div><ul class="q-list">
+              <li data-da="Hvad er AI i denne styrelses kontekst — hvad forestiller vi os?" data-en="What is AI in this agency's context — what do we imagine?">Hvad er AI i denne styrelses kontekst — hvad forestiller vi os?</li>
+              <li data-da="Er der delte forestillinger om hvad AI bør og ikke bør gøre?" data-en="Are there shared ideas about what AI should and should not do?">Er der delte forestillinger om hvad AI bør og ikke bør gøre?</li>
+            </ul></div>
+            <div><div class="q-phase-label" data-da="Analyse" data-en="Analysis">Analyse</div><ul class="q-list">
+              <li data-da="Kan vi konkret forklare hvad AI gør — og hvad det ikke gør?" data-en="Can we concretely explain what AI does — and what it does not?">Kan vi konkret forklare hvad AI gør — og hvad det ikke gør?</li>
+              <li data-da="Er der testet, hvordan AI-output faktisk bruges i praksis?" data-en="Has it been tested how AI output is actually used in practice?">Er der testet, hvordan AI-output faktisk bruges i praksis?</li>
+            </ul></div>
+            <div><div class="q-phase-label" data-da="Adoption" data-en="Adoption">Adoption</div><ul class="q-list">
+              <li data-da="Giver AI stadig mening, når sager og kontekst ændrer sig?" data-en="Does AI still make sense when cases and context change?">Giver AI stadig mening, når sager og kontekst ændrer sig?</li>
+              <li data-da="Er der tegn på fortolkningsmæssig drift — at AI bruges anderledes end intenderet?" data-en="Are there signs of interpretive drift — AI being used differently than intended?">Er der tegn på fortolkningsmæssig drift — at AI bruges anderledes end intenderet?</li>
+            </ul></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-trigger" onclick="toggleAccordion(this)">
+          <span data-da="⚙️ &nbsp;Socioteknnisk Forankring" data-en="⚙️ &nbsp;Sociotechnical Embedding">⚙️ &nbsp;Socioteknnisk Forankring</span>
+          <svg class="chevron" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+        </button>
+        <div class="accordion-body">
+          <div class="q-grid">
+            <div><div class="q-phase-label" data-da="Udforskning" data-en="Exploration">Udforskning</div><ul class="q-list">
+              <li data-da="Hvad ser arbejdsgangene ud i dag — hvem gør hvad og hvornår?" data-en="What do current workflows look like — who does what and when?">Hvad ser arbejdsgangene ud i dag — hvem gør hvad og hvornår?</li>
+              <li data-da="Er der opgaver der ikke bør automatiseres — og hvorfor?" data-en="Are there tasks that should not be automated — and why?">Er der opgaver der ikke bør automatiseres — og hvorfor?</li>
+            </ul></div>
+            <div><div class="q-phase-label" data-da="Analyse" data-en="Analysis">Analyse</div><ul class="q-list">
+              <li data-da="Hvad overtager AI, og hvad beholder mennesket?" data-en="What does AI take over, and what does the human retain?">Hvad overtager AI, og hvad beholder mennesket?</li>
+              <li data-da="Hvad sker der, når AI er usikker eller tager fejl?" data-en="What happens when AI is uncertain or makes an error?">Hvad sker der, når AI er usikker eller tager fejl?</li>
+              <li data-da="Hvem har det endelige faglige og juridiske ansvar?" data-en="Who holds the final professional and legal responsibility?">Hvem har det endelige faglige og juridiske ansvar?</li>
+            </ul></div>
+            <div><div class="q-phase-label" data-da="Adoption" data-en="Adoption">Adoption</div><ul class="q-list">
+              <li data-da="Holder arrangementet under det normale daglige pres?" data-en="Does the arrangement hold under normal daily pressure?">Holder arrangementet under det normale daglige pres?</li>
+              <li data-da="Er der reel menneskelig kontrol — eller er oversight en formalitet?" data-en="Is there real human control — or has oversight become a formality?">Er der reel menneskelig kontrol — eller er oversight en formalitet?</li>
+            </ul></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FACILITATION GUIDE -->
+<section id="facilitering">
+  <div class="container">
+    <div class="section-label" data-da="Faciliteringsguide" data-en="Facilitation Guide">Faciliteringsguide</div>
+    <h2 data-da="Sådan bruger I PA-STAIR i jeres styrelse" data-en="How to use PA-STAIR in your agency">Sådan bruger I PA-STAIR i jeres styrelse</h2>
+    <div class="fac-intro" style="margin-top:12px;">
+      <p data-da="PA-STAIR fungerer bedst, når det bruges af en gruppe der repræsenterer forskellige organisatoriske perspektiver på det AI-initiativ, I arbejder med. Vælg din rolle for en tilpasset guide." data-en="PA-STAIR works best when used by a group representing different organisational perspectives on the AI initiative you are working with. Select your role for a tailored guide.">PA-STAIR fungerer bedst, når det bruges af en gruppe der repræsenterer forskellige organisatoriske perspektiver på det AI-initiativ, I arbejder med. Vælg din rolle for en tilpasset guide.</p>
+    </div>
+    <div class="role-tabs">
+      <button class="role-tab-btn active" onclick="switchRole(this,'leder')" data-da="Leder / Mellemleder" data-en="Manager / Middle Manager">Leder / Mellemleder</button>
+      <button class="role-tab-btn" onclick="switchRole(this,'medarbejder')" data-da="Medarbejder / Fagprofessionel" data-en="Employee / Professional">Medarbejder / Fagprofessionel</button>
+      <button class="role-tab-btn" onclick="switchRole(this,'direktion')" data-da="Direktion / Styregruppe" data-en="Executive / Steering Group">Direktion / Styregruppe</button>
+    </div>
+
+    <div class="role-content active" id="role-leder">
+      <div class="steps-timeline">
+        <div class="step"><div class="step-num">1</div><div class="step-body">
+          <h3 data-da="Vælg et konkret AI-initiativ" data-en="Choose a concrete AI initiative">Vælg et konkret AI-initiativ</h3>
+          <p data-da="PA-STAIR fungerer bedst, når det er forankret i et specifikt use case — ikke AI generelt. Vælg et initiativ, der er aktuelt og konkret nok til at gruppen kan diskutere det fra egne erfaringer." data-en="PA-STAIR works best when anchored in a specific use case — not AI in general. Choose an initiative that is current and concrete enough for the group to discuss from their own experience.">PA-STAIR fungerer bedst, når det er forankret i et specifikt use case — ikke AI generelt. Vælg et initiativ, der er aktuelt og konkret nok til at gruppen kan diskutere det fra egne erfaringer.</p>
+          <div class="step-tips"><h4 data-da="Praktiske tips" data-en="Practical tips">Praktiske tips</h4><ul>
+            <li data-da="Start med et use case der allerede er i gang — det giver mere konkret materiale" data-en="Start with a use case already underway — it provides more concrete material">Start med et use case der allerede er i gang — det giver mere konkret materiale</li>
+            <li data-da="Undgå at starte med 'AI generelt i styrelsen' — det bliver for abstrakt" data-en="Avoid starting with 'AI in general' — it becomes too abstract">Undgå at starte med 'AI generelt i styrelsen' — det bliver for abstrakt</li>
+          </ul></div>
+        </div></div>
+        <div class="step"><div class="step-num">2</div><div class="step-body">
+          <h3 data-da="Sæt en tværgående gruppe" data-en="Assemble a cross-functional group">Sæt en tværgående gruppe</h3>
+          <p data-da="Inviter 4–8 deltagere der repræsenterer forskellige perspektiver: sagsbehandlere, jurist, IT-ansvarlig og dig som leder. Mangfoldighed i rummet er en fordel — rammeværket er designet til at gøre uenighed synlig." data-en="Invite 4–8 participants representing different perspectives: case workers, legal, IT and you as manager. Diversity in the room is an advantage — the framework is designed to make disagreement visible.">Inviter 4–8 deltagere der repræsenterer forskellige perspektiver: sagsbehandlere, jurist, IT-ansvarlig og dig som leder. Mangfoldighed i rummet er en fordel — rammeværket er designet til at gøre uenighed synlig.</p>
+          <div class="step-tips"><h4 data-da="Praktiske tips" data-en="Practical tips">Praktiske tips</h4><ul>
+            <li data-da="Inkluder dem der faktisk skal bruge AI i dagligdagen" data-en="Include those who will actually use AI day-to-day">Inkluder dem der faktisk skal bruge AI i dagligdagen</li>
+            <li data-da="Sæt 2–3 timer af — undgå at skynde processen" data-en="Set aside 2–3 hours — avoid rushing the process">Sæt 2–3 timer af — undgå at skynde processen</li>
+          </ul></div>
+        </div></div>
+        <div class="step"><div class="step-num">3</div><div class="step-body">
+          <h3 data-da="Diskutér kronblad for kronblad" data-en="Work through petal by petal">Diskutér kronblad for kronblad</h3>
+          <p data-da="Tag ét kronblad ad gangen. For hvert: (a) Diskutér hvilken fase jeres use case befinder sig i, (b) Notér de vigtigste usikkerheder, (c) Notér uenigheder — de er vigtige." data-en="Take one petal at a time. For each: (a) discuss which phase your use case is in, (b) note the most important uncertainties, (c) note disagreements — they matter.">Tag ét kronblad ad gangen. For hvert: (a) Diskutér hvilken fase jeres use case befinder sig i, (b) Notér de vigtigste usikkerheder, (c) Notér uenigheder — de er vigtige.</p>
+          <div class="step-tips"><h4 data-da="Praktiske tips" data-en="Practical tips">Praktiske tips</h4><ul>
+            <li data-da="Brug spørgsmålene i 'Praktisk guide' som samtalestarter" data-en="Use the questions in 'Practical guide' as conversation starters">Brug spørgsmålene i 'Praktisk guide' som samtalestarter</li>
+            <li data-da="Det er fint at ende med 'vi ved det ikke' — det er en vigtig erkendelse" data-en="It is fine to end with 'we don't know' — that is a valuable insight">Det er fint at ende med 'vi ved det ikke' — det er en vigtig erkendelse</li>
+            <li data-da="Afsæt 15–20 minutter per kronblad" data-en="Allow 15–20 minutes per petal">Afsæt 15–20 minutter per kronblad</li>
+          </ul></div>
+        </div></div>
+        <div class="step"><div class="step-num">4</div><div class="step-body">
+          <h3 data-da="Opsummer og prioritér" data-en="Summarise and prioritise">Opsummer og prioritér</h3>
+          <p data-da="Afslut sessionen med at samle billedet: Hvor er vi stærke? Hvad er de vigtigste huller? Hvad er de 2–3 konkrete skridt, vi tager herfra?" data-en="Close the session by gathering the picture: where are we strong? What are the most important gaps? What are the 2–3 concrete next steps?">Afslut sessionen med at samle billedet: Hvor er vi stærke? Hvad er de vigtigste huller? Hvad er de 2–3 konkrete skridt, vi tager herfra?</p>
+          <div class="step-tips"><h4 data-da="Husk" data-en="Remember">Husk</h4><ul>
+            <li data-da="PA-STAIR giver ikke svar — det hjælper med at stille de rigtige spørgsmål" data-en="PA-STAIR does not give answers — it helps ask the right questions">PA-STAIR giver ikke svar — det hjælper med at stille de rigtige spørgsmål</li>
+            <li data-da="Overvej at gentage sessionen om 3–6 måneder for at se udviklingen" data-en="Consider repeating the session in 3–6 months to see the development">Overvej at gentage sessionen om 3–6 måneder for at se udviklingen</li>
+          </ul></div>
+        </div></div>
+      </div>
+    </div>
+
+    <div class="role-content" id="role-medarbejder">
+      <div class="steps-timeline">
+        <div class="step"><div class="step-num">1</div><div class="step-body">
+          <h3 data-da="Forstå hvad PA-STAIR bruges til" data-en="Understand what PA-STAIR is for">Forstå hvad PA-STAIR bruges til</h3>
+          <p data-da="PA-STAIR er et samtaleværktøj — ikke et kontrolredskab. Det bruges til at gøre udfordringer synlige for ledelsen. Din indsigt fra den daglige praksis er afgørende." data-en="PA-STAIR is a dialogue tool — not a control instrument. It is used to make challenges visible to management. Your insight from daily practice is essential.">PA-STAIR er et samtaleværktøj — ikke et kontrolredskab. Det bruges til at gøre udfordringer synlige for ledelsen. Din indsigt fra den daglige praksis er afgørende.</p>
+          <div class="step-tips"><h4 data-da="Husk" data-en="Remember">Husk</h4><ul>
+            <li data-da="Der er ingen rigtige svar — ærlighed er mere værdifuldt end 'de rigtige' svar" data-en="There are no right answers — honesty is more valuable than 'correct' answers">Der er ingen rigtige svar — ærlighed er mere værdifuldt end 'de rigtige' svar</li>
+            <li data-da="Du må godt sige 'jeg ved det ikke' eller 'det er uklart'" data-en="You are welcome to say 'I don't know' or 'it's unclear'">Du må godt sige 'jeg ved det ikke' eller 'det er uklart'</li>
+          </ul></div>
+        </div></div>
+        <div class="step"><div class="step-num">2</div><div class="step-body">
+          <h3 data-da="Bidrag med din faglige vinkel" data-en="Contribute your professional perspective">Bidrag med din faglige vinkel</h3>
+          <p data-da="Du er den, der kan sige noget om hvad der faktisk sker i dagligdagen. Del dine erfaringer, bekymringer og spørgsmål åbent." data-en="You are the one who can speak to what actually happens day-to-day. Share your experiences, concerns and questions openly.">Du er den, der kan sige noget om hvad der faktisk sker i dagligdagen. Del dine erfaringer, bekymringer og spørgsmål åbent.</p>
+          <div class="step-tips"><h4 data-da="Spørgsmål til refleksion" data-en="Questions for reflection">Spørgsmål til refleksion</h4><ul>
+            <li data-da="Hvad ville AI konkret betyde for min daglige arbejdsopgave?" data-en="What would AI concretely mean for my daily work task?">Hvad ville AI konkret betyde for min daglige arbejdsopgave?</li>
+            <li data-da="Er der noget i min opgave der ikke bør automatiseres?" data-en="Is there something in my task that should not be automated?">Er der noget i min opgave der ikke bør automatiseres?</li>
+            <li data-da="Føler jeg mig klædt på til at bruge og vurdere AI-output?" data-en="Do I feel equipped to use and assess AI output?">Føler jeg mig klædt på til at bruge og vurdere AI-output?</li>
+          </ul></div>
+        </div></div>
+      </div>
+    </div>
+
+    <div class="role-content" id="role-direktion">
+      <div class="steps-timeline">
+        <div class="step"><div class="step-num">1</div><div class="step-body">
+          <h3 data-da="Brug PA-STAIR strategisk" data-en="Use PA-STAIR strategically">Brug PA-STAIR strategisk</h3>
+          <p data-da="Som direktion er jeres rolle at sikre at styrelsen har de strukturelle betingelser for AI-adoption. PA-STAIR kan bruges til at prioritere, hvor I investerer ressourcer og opmærksomhed." data-en="As an executive, your role is to ensure the agency has the structural conditions for AI adoption. PA-STAIR can be used to prioritise where you invest resources and attention.">Som direktion er jeres rolle at sikre at styrelsen har de strukturelle betingelser for AI-adoption. PA-STAIR kan bruges til at prioritere, hvor I investerer ressourcer og opmærksomhed.</p>
+          <div class="step-tips"><h4 data-da="Strategiske spørgsmål" data-en="Strategic questions">Strategiske spørgsmål</h4><ul>
+            <li data-da="Har vi en governance-struktur der kan bære AI-initiativer?" data-en="Do we have a governance structure capable of carrying AI initiatives?">Har vi en governance-struktur der kan bære AI-initiativer?</li>
+            <li data-da="Investerer vi tilstrækkeligt i medarbejderkompetencer?" data-en="Are we investing sufficiently in staff competences?">Investerer vi tilstrækkeligt i medarbejderkompetencer?</li>
+            <li data-da="Er vi for afhængige af ekstern ekspertise?" data-en="Are we too dependent on external expertise?">Er vi for afhængige af ekstern ekspertise?</li>
+          </ul></div>
+        </div></div>
+        <div class="step"><div class="step-num">2</div><div class="step-body">
+          <h3 data-da="Kør PA-STAIR på tværs af initiativer" data-en="Run PA-STAIR across initiatives">Kør PA-STAIR på tværs af initiativer</h3>
+          <p data-da="Brug PA-STAIR på 2–3 AI-initiativer parallelt for et komparativt billede af, hvilke dimensioner der er systematisk underudviklede på tværs af styrelsen." data-en="Use PA-STAIR on 2–3 AI initiatives in parallel for a comparative picture of which dimensions are systematically underdeveloped across the agency.">Brug PA-STAIR på 2–3 AI-initiativer parallelt for et komparativt billede af, hvilke dimensioner der er systematisk underudviklede på tværs af styrelsen.</p>
+        </div></div>
+        <div class="step"><div class="step-num">3</div><div class="step-body">
+          <h3 data-da="Legitimér processen og handle på den" data-en="Legitimise the process and act on it">Legitimér processen og handle på den</h3>
+          <p data-da="PA-STAIR virker kun, hvis ledelsen handler på de huller og usikkerheder der identificeres. Kommunikér tilbage til deltagerne hvad I gør med inputs." data-en="PA-STAIR only works if leadership acts on the gaps and uncertainties identified. Communicate back to participants what you do with their inputs.">PA-STAIR virker kun, hvis ledelsen handler på de huller og usikkerheder der identificeres. Kommunikér tilbage til deltagerne hvad I gør med inputs.</p>
+          <div class="step-tips"><h4 data-da="Husk" data-en="Remember">Husk</h4><ul>
+            <li data-da="PA-STAIR er en løbende proces — ikke en engangsøvelse" data-en="PA-STAIR is an ongoing process — not a one-off exercise">PA-STAIR er en løbende proces — ikke en engangsøvelse</li>
+            <li data-da="Overvej at integrere PA-STAIR i den årlige digitaliseringsproces" data-en="Consider integrating PA-STAIR into the annual digitalisation process">Overvej at integrere PA-STAIR i den årlige digitaliseringsproces</li>
+          </ul></div>
+        </div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NOT / IS -->
+<section id="brug">
+  <div class="container">
+    <div class="section-label" data-da="Brug af rammeværket" data-en="Using the framework">Brug af rammeværket</div>
+    <h2 data-da="PA-STAIR er et dialogværktøj — ikke en dom" data-en="PA-STAIR is a dialogue tool — not a verdict">PA-STAIR er et dialogværktøj — ikke en dom</h2>
+    <div class="use-grid">
+      <div>
+        <div class="use-card" style="border-left:4px solid var(--teal);">
+          <h3 style="color:var(--teal);" data-da="✓ PA-STAIR er" data-en="✓ PA-STAIR is">✓ PA-STAIR er</h3>
+          <p data-da="Et refleksivt, diagnostisk redskab til struktureret dialog om AI-parathed i en specifik styrelse og et specifikt use case." data-en="A reflective, diagnostic tool for structured dialogue about AI readiness in a specific agency and a specific use case.">Et refleksivt, diagnostisk redskab til struktureret dialog om AI-parathed i en specifik styrelse og et specifikt use case.</p>
+          <ul>
+            <li data-da="Et fælles sprog om AI-parathed på tværs af organisationsniveauer" data-en="A common language about AI readiness across organisational levels">Et fælles sprog om AI-parathed på tværs af organisationsniveauer</li>
+            <li data-da="Et redskab til at gøre uensartet parathed synlig og diskuterbar" data-en="A tool for making uneven readiness visible and discussable">Et redskab til at gøre uensartet parathed synlig og diskuterbar</li>
+            <li data-da="En ramme for at identificere, hvilke spørgsmål der stadig mangler svar" data-en="A frame for identifying which questions still need answers">En ramme for at identificere, hvilke spørgsmål der stadig mangler svar</li>
+            <li data-da="Et iterativt redskab — kørsel én gang er sjældent nok" data-en="An iterative tool — running it once is rarely enough">Et iterativt redskab — kørsel én gang er sjældent nok</li>
+          </ul>
+        </div>
+        <div class="warn-box">
+          <h4 data-da="Vigtigt" data-en="Important">Vigtigt</h4>
+          <p data-da="PA-STAIR er ikke valideret til kvantitativ måling og giver ingen procentscore. Rammeværket er evalueret kvalitativt med praktikere fra tre styrelser og er tiltænkt en dansk offentlig kontekst." data-en="PA-STAIR is not validated for quantitative measurement and gives no percentage score. The framework was evaluated qualitatively with practitioners from three agencies and is intended for a Danish public sector context.">PA-STAIR er ikke valideret til kvantitativ måling og giver ingen procentscore. Rammeværket er evalueret kvalitativt med praktikere fra tre styrelser og er tiltænkt en dansk offentlig kontekst.</p>
+        </div>
+      </div>
+      <div>
+        <div class="use-card" style="border-left:4px solid #aaa;">
+          <h3 style="color:var(--text-muted);" data-da="✗ PA-STAIR er ikke" data-en="✗ PA-STAIR is not">✗ PA-STAIR er ikke</h3>
+          <p data-da="En standardiseret modenhedsmodel der kan benchmarke og sammenligne styrelser på tværs." data-en="A standardised maturity model that can benchmark and compare agencies.">En standardiseret modenhedsmodel der kan benchmarke og sammenligne styrelser på tværs.</p>
+          <ul>
+            <li data-da="Ikke en scoringsmodel eller et maturity benchmark" data-en="Not a scoring model or maturity benchmark">Ikke en scoringsmodel eller et maturity benchmark</li>
+            <li data-da="Ikke en compliance-tjekliste, der verificerer lovlydighed" data-en="Not a compliance checklist that verifies lawfulness">Ikke en compliance-tjekliste, der verificerer lovlydighed</li>
+            <li data-da="Ikke et engangsredskab med permanente resultater" data-en="Not a one-off tool with permanent results">Ikke et engangsredskab med permanente resultater</li>
+            <li data-da="Ikke en erstatning for specialiseret juridisk eller teknisk rådgivning" data-en="Not a replacement for specialised legal or technical advice">Ikke en erstatning for specialiseret juridisk eller teknisk rådgivning</li>
+          </ul>
+        </div>
+        <div class="use-card" style="margin-top:16px;">
+          <h3 data-da="Hvem skal deltage?" data-en="Who should participate?">Hvem skal deltage?</h3>
+          <p data-da="For det bedste resultat, inkluder minimum én repræsentant fra:" data-en="For best results, include at least one representative from:">For det bedste resultat, inkluder minimum én repræsentant fra:</p>
+          <ul>
+            <li data-da="Fagprofessionelle der bruger systemet i dagligdagen" data-en="Professionals who will use the system day-to-day">Fagprofessionelle der bruger systemet i dagligdagen</li>
+            <li data-da="Leder med ansvar for det konkrete use case" data-en="Manager responsible for the specific use case">Leder med ansvar for det konkrete use case</li>
+            <li data-da="Juridisk kompetence" data-en="Legal competence">Juridisk kompetence</li>
+            <li data-da="IT / digitalisering" data-en="IT / Digitalisation">IT / digitalisering</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INTERACTIVE FRAMEWORK -->
+<section id="rammevaerket">
+  <div class="container">
+    <div class="section-label" data-da="Interaktivt rammeværk" data-en="Interactive framework">Interaktivt rammeværk</div>
+    <h2 data-da="Brug rammeværket direkte her" data-en="Use the framework directly here">Brug rammeværket direkte her</h2>
+    <p style="margin-top:10px;" data-da="Klik på et kronblad for at se den praktiske beskrivelse. Skift adoptionsfase med knapperne til venstre. Tilføj noter til hvert kronblad og fase — de gemmes i din browser." data-en="Click a petal to see the practical description. Switch adoption phase using the buttons on the left. Add notes for each petal and phase — they are saved in your browser.">Klik på et kronblad for at se den praktiske beskrivelse. Skift adoptionsfase med knapperne til venstre. Tilføj noter til hvert kronblad og fase — de gemmes i din browser.</p>
+    <div class="fw-layout">
+
+      <!-- Phase selector + legend -->
+      <div class="fw-phase-btns">
+        <button class="fw-phase-btn active" onclick="setFwPhase('e')" id="fw-pbtn-e">
+          <div class="fw-phase-dot">1</div>
+          <div><div class="fw-phase-name" data-da="Udforskning" data-en="Exploration">Udforskning</div><div class="fw-phase-sub" data-da="At gøre AI tilgængeligt" data-en="Making AI available">At gøre AI tilgængeligt</div></div>
+        </button>
+        <button class="fw-phase-btn" onclick="setFwPhase('a')" id="fw-pbtn-a">
+          <div class="fw-phase-dot">2</div>
+          <div><div class="fw-phase-name" data-da="Analyse" data-en="Analysis">Analyse</div><div class="fw-phase-sub" data-da="At gøre AI meningsfuldt" data-en="Making AI meaningful">At gøre AI meningsfuldt</div></div>
+        </button>
+        <button class="fw-phase-btn" onclick="setFwPhase('d')" id="fw-pbtn-d">
+          <div class="fw-phase-dot">3</div>
+          <div><div class="fw-phase-name" data-da="Adoption" data-en="Adoption">Adoption</div><div class="fw-phase-sub" data-da="At gøre AI forankret" data-en="Making AI embedded">At gøre AI forankret</div></div>
+        </button>
+        <div class="fw-legend">
+          <div class="fw-legend-title" data-da="Kronblade" data-en="Petals">Kronblade</div>
+          <div class="fw-legend-item"><div class="fw-legend-dot" style="background:#3B1463"></div><span data-da="Jura &amp; Compliance" data-en="Legal &amp; Compliance">Jura &amp; Compliance</span></div>
+          <div class="fw-legend-item"><div class="fw-legend-dot" style="background:#1B6B6B"></div><span data-da="Ekstern Enablement" data-en="External Enablement">Ekstern Enablement</span></div>
+          <div class="fw-legend-item"><div class="fw-legend-dot" style="background:#7B3FA0"></div><span data-da="Governance &amp; Legitimitet" data-en="Governance &amp; Legitimacy">Governance &amp; Legitimitet</span></div>
+          <div class="fw-legend-item"><div class="fw-legend-dot" style="background:#1A7A50"></div><span data-da="Mobilisering" data-en="Workforce Mobilisation">Mobilisering</span></div>
+          <div class="fw-legend-item"><div class="fw-legend-dot" style="background:#C05000"></div><span data-da="Meningsdannelse" data-en="Sensemaking">Meningsdannelse</span></div>
+          <div class="fw-legend-item"><div class="fw-legend-dot" style="background:#0A5A70"></div><span data-da="Sociotek. Forankring" data-en="Sociotech. Embedding">Sociotek. Forankring</span></div>
+        </div>
+      </div>
+
+      <!-- Flower SVG -->
+      <div class="fw-svg-wrap">
+        <svg viewBox="0 0 520 520" xmlns="http://www.w3.org/2000/svg">
+          <!-- Decorative phase rings -->
+          <circle cx="260" cy="260" r="150" stroke="#C8C8C8" stroke-width="1" fill="none" stroke-dasharray="5 4"/>
+          <circle cx="260" cy="260" r="108" stroke="#C8C8C8" stroke-width="1" fill="none" stroke-dasharray="5 4"/>
+          <circle cx="260" cy="260" r="65"  stroke="#C8C8C8" stroke-width="1" fill="none" stroke-dasharray="5 4"/>
+          <!-- Active ring highlight (JS updates r) -->
+          <circle cx="260" cy="260" r="65" id="fw-ring" stroke="#1B6B6B" stroke-width="2.5" fill="none" opacity="0.55"/>
+          <!-- Petals (ellipse cx=260 cy=168 = 92px above center; tip at 260-168+82=174px from center) -->
+          <ellipse id="svg-fw-p1" class="fw-petal" cx="260" cy="168" rx="52" ry="82" fill="#3B1463" fill-opacity="0.83" transform="rotate(0 260 260)"   onclick="selectFwPetal('p1')"/>
+          <ellipse id="svg-fw-p2" class="fw-petal" cx="260" cy="168" rx="52" ry="82" fill="#1B6B6B" fill-opacity="0.83" transform="rotate(60 260 260)"  onclick="selectFwPetal('p2')"/>
+          <ellipse id="svg-fw-p3" class="fw-petal" cx="260" cy="168" rx="52" ry="82" fill="#7B3FA0" fill-opacity="0.83" transform="rotate(120 260 260)" onclick="selectFwPetal('p3')"/>
+          <ellipse id="svg-fw-p4" class="fw-petal" cx="260" cy="168" rx="52" ry="82" fill="#1A7A50" fill-opacity="0.83" transform="rotate(180 260 260)" onclick="selectFwPetal('p4')"/>
+          <ellipse id="svg-fw-p5" class="fw-petal" cx="260" cy="168" rx="52" ry="82" fill="#C05000" fill-opacity="0.83" transform="rotate(240 260 260)" onclick="selectFwPetal('p5')"/>
+          <ellipse id="svg-fw-p6" class="fw-petal" cx="260" cy="168" rx="52" ry="82" fill="#0A5A70" fill-opacity="0.83" transform="rotate(300 260 260)" onclick="selectFwPetal('p6')"/>
+          <!-- Petal labels (positioned at d≈148 from center per rotation) -->
+          <text x="260" y="112"  text-anchor="middle" fill="white" font-size="8" font-weight="700" font-family="sans-serif" pointer-events="none">Jura</text>
+          <text x="388" y="187"  text-anchor="middle" fill="white" font-size="8" font-weight="700" font-family="sans-serif" pointer-events="none">Ekstern</text>
+          <text x="388" y="333"  text-anchor="middle" fill="white" font-size="8" font-weight="700" font-family="sans-serif" pointer-events="none">Gov.</text>
+          <text x="260" y="408"  text-anchor="middle" fill="white" font-size="8" font-weight="700" font-family="sans-serif" pointer-events="none">Arbejdsstyrke</text>
+          <text x="132" y="333"  text-anchor="middle" fill="white" font-size="8" font-weight="700" font-family="sans-serif" pointer-events="none">Sensemaking</text>
+          <text x="132" y="187"  text-anchor="middle" fill="white" font-size="8" font-weight="700" font-family="sans-serif" pointer-events="none">Sociotek.</text>
+          <!-- Center -->
+          <circle cx="260" cy="260" r="50" fill="white" stroke="#E0E0E0" stroke-width="1.5"/>
+          <text x="260" y="255" text-anchor="middle" fill="#3B1463" font-size="9.5" font-weight="800" font-family="sans-serif">PA-STAIR</text>
+          <text x="260" y="269" text-anchor="middle" fill="#999" font-size="7" font-family="sans-serif" id="fw-center-hint">klik et kronblad</text>
+        </svg>
+      </div>
+
+      <!-- Content panel -->
+      <div class="fw-panel">
+        <div class="fw-empty" id="fw-empty">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.35"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+          <span data-da="Klik på et kronblad for at se beskrivelsen og tilføje noter til denne fase" data-en="Click a petal to see the description and add notes for this phase">Klik på et kronblad for at se beskrivelsen og tilføje noter til denne fase</span>
+        </div>
+        <div class="fw-content" id="fw-content">
+          <div class="fw-badge" id="fw-badge"></div>
+          <div class="fw-petal-title" id="fw-title"></div>
+          <div class="fw-phase-tag" id="fw-phase-tag"></div>
+          <div class="fw-petal-desc" id="fw-desc"></div>
+          <div class="fw-notes-lbl" data-da="Mine noter" data-en="My notes">Mine noter</div>
+          <textarea class="fw-notes" id="fw-notes" placeholder="Skriv jeres refleksioner her..."></textarea>
+          <div class="fw-save-row">
+            <button class="fw-save-btn" onclick="saveFwNote()" data-da="Gem note" data-en="Save note">Gem note</button>
+            <span class="fw-saved" id="fw-saved" data-da="Gemt ✓" data-en="Saved ✓">Gemt ✓</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="logo"><span style="opacity:0.7;">PA-</span>STAIR</div>
+        <p data-da="Public Agency — Sociotechnical AI Readiness. Et diagnostisk rammeværk til danske offentlige styrelser, udviklet på IT-Universitetet i København." data-en="Public Agency — Sociotechnical AI Readiness. A diagnostic framework for Danish public agencies, developed at the IT University of Copenhagen.">Public Agency — Sociotechnical AI Readiness. Et diagnostisk rammeværk til danske offentlige styrelser, udviklet på IT-Universitetet i København.</p>
+      </div>
+      <div class="footer-col">
+        <h4 data-da="Rammeværket" data-en="Framework">Rammeværket</h4>
+        <a href="#om" data-da="Om PA-STAIR" data-en="About PA-STAIR">Om PA-STAIR</a>
+        <a href="#faser" data-da="De tre faser" data-en="The three phases">De tre faser</a>
+        <a href="#dimensioner" data-da="De seks dimensioner" data-en="The six dimensions">De seks dimensioner</a>
+      </div>
+      <div class="footer-col">
+        <h4 data-da="Guides" data-en="Guides">Guides</h4>
+        <a href="#praktisk" data-da="Praktisk guide" data-en="Practical guide">Praktisk guide</a>
+        <a href="#facilitering" data-da="Faciliteringsguide" data-en="Facilitation guide">Faciliteringsguide</a>
+        <a href="https://mortenwahl.github.io/PA-STAIR-Framework/" target="_blank" data-da="Interaktivt PA-STAIR ↗" data-en="Interactive PA-STAIR ↗">Interaktivt PA-STAIR ↗</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span data-da="DIM-speciale, IT-Universitetet i København, 2026" data-en="DIM thesis, IT University of Copenhagen, 2026">DIM-speciale, IT-Universitetet i København, 2026</span>
+      <span>Louise Harder Fischer · Ane Ida Abildgaard · Morten Lund · Morten Wahl Petersen</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ─── INTERACTIVE FRAMEWORK DATA ───
+const FW = {
+  currentPetal: null,
+  currentPhase: 'e',
+  notes: {},
+  rings: { e: 65, a: 108, d: 150 },
+  phaseNames: {
+    e: { da: 'Udforskning', en: 'Exploration' },
+    a: { da: 'Analyse',     en: 'Analysis'   },
+    d: { da: 'Adoption',    en: 'Adoption'   }
+  },
+  data: {
+    p1: { color:'#3B1463', name:{ da:'Jura & Compliance', en:'Legal & Compliance' }, phases:{
+      e:{ da:'Identificering af, hvilke juridiske spørgsmål et givet use case vil rejse, og indhentning af en foreløbig juridisk vurdering — uden at lukke prematurt for eksperimentering.', en:'Identifying which legal questions a given use case will raise and obtaining a preliminary legal reading — without prematurely closing the space for experimentation.' },
+      a:{ da:'Substantiel juridisk vurdering: DPIA, klassificering under EU AI Act, afklaring af behandlingsgrundlag og alignment med sektorlovgivning.', en:'Substantive legal assessment: DPIA, classification under the EU AI Act, clarification of processing bases and alignment with sector law.' },
+      d:{ da:'Løbende forpligtelse: vedligeholdelse af audit trails, monitorering af modeller mod juridiske forpligtelser og opdatering af dokumentation efterhånden som lovgivningen udvikler sig.', en:'Continuous obligation: maintaining audit trails, monitoring models against legal commitments and updating documentation as legislation evolves.' }
+    }},
+    p2: { color:'#1B6B6B', name:{ da:'Ekstern Enablement', en:'External Enablement' }, phases:{
+      e:{ da:'Adgang til ekspertise, brug af eksternt proof-of-concept og læring fra kollega-styrelser — uden at blive låst til én leverandør eller paradigme.', en:'Accessing expertise, drawing on external proof-of-concept and learning from peer agencies — without becoming locked into a single supplier or paradigm.' },
+      a:{ da:'Bevidst håndtering af afhængigheder: strukturering af leverandørrelationer så viden overføres indad, og vurdering af om eksterne tilbud passer til konteksten.', en:'Deliberate management of dependencies: structuring vendor relationships so knowledge transfers inwards and assessing whether external offers fit the context.' },
+      d:{ da:'Holdbarhed af eksterne arrangementer: håndtering af modelopdateringer fra leverandører, opretholdelse af tværgående samarbejde og tilstrækkelig intern kompetence til at forblive en kompetent modpart.', en:'Durability of external arrangements: managing model updates from vendors, sustaining cross-agency collaboration and retaining sufficient internal competence.' }
+    }},
+    p3: { color:'#7B3FA0', name:{ da:'Governance & Legitimitet', en:'Governance & Legitimacy' }, phases:{
+      e:{ da:'Eksistensen af et forum, hvor AI-idéer kan fremsættes, prioriteres og sanktioneres tidligt — så udforskning hverken undertrykkes eller afkobles fra ansvarlighed.', en:'Existence of a forum where AI ideas can be surfaced, prioritised and sanctioned early — so exploration is neither suppressed nor decoupled from accountability.' },
+      a:{ da:'Afklaring af beslutningsrettigheder, rollefordelinger, eskaleringsvejer og de kriterier, som AI-initiativer vurderes efter.', en:'Clarifying decision rights, role allocations, escalation paths and the criteria against which AI initiatives will be assessed.' },
+      d:{ da:'Fortsat produktion af legitimitet i drift: tilsyn, transparens over for borgere og medarbejdere og institutionel troværdighed af styrelsens AI-praksis over tid.', en:"Continued production of legitimacy in operation: oversight, transparency towards citizens and staff and institutional credibility of the agency's AI practice over time." }
+    }},
+    p4: { color:'#1A7A50', name:{ da:'Mobilisering af Arbejdsstyrken', en:'Workforce Mobilisation' }, phases:{
+      e:{ da:'Identifikation og beskyttelse af frontløbere, rum for nysgerrighedsdrevet engagement og skabelse af første berøringspunkter mellem medarbejdere og AI.', en:'Identifying and protecting frontrunners, allowing space for curiosity-driven engagement and creating initial points of contact between staff and AI.' },
+      a:{ da:'Bevidst opbygning af kompetencer: uddannelse, rolledesign, inddragelse af faggrupper i use case-vurdering og kultivering af opbakning på tværs af hierarkiske niveauer.', en:'Deliberate building of competence: training, role design, involvement of professional groups in use case assessment and cultivating buy-in across hierarchical levels.' },
+      d:{ da:'Holdbarhed af arbejdsstyrkens dimension: løbende læring, succession af ekspertise, integration af AI-kompetencer i stillingsbeskrivelser og opretholdelse af faglig identitet og jobtilfredshed.', en:'Sustainability of the workforce dimension: ongoing learning, succession of expertise, integration of AI competence into job descriptions and maintenance of professional identity.' }
+    }},
+    p5: { color:'#C05000', name:{ da:'Meningsdannelse & Oversættelse', en:'Sensemaking & Translation' }, phases:{
+      e:{ da:'Artikulering af hvad AI kan betyde for styrelsens mandat, invitere faggrupper ind i samtalen og synliggøre tavse antagelser om, hvad AI bør og ikke bør gøre.', en:"Articulating what AI might mean for the agency's mandate, inviting professional groups into the conversation and surfacing tacit assumptions about what AI should and should not do." },
+      a:{ da:'Aktiv oversættelse af AI-kapabiliteter til specifikke faglige praksisser: test af, hvordan AI-output læses og bruges, og identifikation af, hvor automatisering understøtter fagligt skøn.', en:'Active translation of AI capabilities into specific professional practices: testing how AI outputs are read and used and identifying where automation supports professional judgement.' },
+      d:{ da:'Opretholdelse af mening over tid: sikring af at AI fortsat giver mening efterhånden som sager, medarbejdere og kontekster udvikler sig — og at fortolkningsmæssig drift erkendes og håndteres.', en:'Maintenance of meaning over time: ensuring AI continues to make sense as cases, staff and contexts evolve — and that interpretive drift is recognised and addressed.' }
+    }},
+    p6: { color:'#0A5A70', name:{ da:'Socioteknnisk Forankring', en:'Sociotechnical Embedding' }, phases:{
+      e:{ da:'Kortlægning af eksisterende workflows og identifikation af punkter, hvor AI kan indsættes uden at forstyrre essentielt fagligt skøn.', en:'Mapping current workflows and identifying points where AI might be inserted without disrupting essential professional judgement.' },
+      a:{ da:'Bevidst design af det socioteknniske system: hvordan opgaver omfordeles mellem mennesker og AI, hvordan overdragelser struktureres, og hvordan undtagelser håndteres.', en:'Deliberate design of the sociotechnical system: how tasks are redistributed between humans and AI, how handovers are structured and how exceptions are handled.' },
+      d:{ da:'Holdbarhed af forankringen: om arrangementet holder under driftsbelastning, om feedback-loops mellem AI-adfærd og faglig praksis fungerer, og om styrelsen kan tilpasse sig refleksivt.', en:'Durability of embedding: whether the arrangement holds under operational load, whether feedback loops between AI behaviour and professional practice are functioning and whether the agency can adapt reflexively.' }
+    }}
+  }
+};
+
+// Load saved notes from localStorage
+try { FW.notes = JSON.parse(localStorage.getItem('pastair-notes') || '{}'); } catch(e) { FW.notes = {}; }
+
+function setFwPhase(phase) {
+  if (FW.currentPetal) autoSaveFwNote();
+  FW.currentPhase = phase;
+  document.querySelectorAll('.fw-phase-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('fw-pbtn-' + phase).classList.add('active');
+  document.getElementById('fw-ring').setAttribute('r', FW.rings[phase]);
+  if (FW.currentPetal) updateFwPanel();
+}
+
+function selectFwPetal(id) {
+  if (FW.currentPetal) autoSaveFwNote();
+  FW.currentPetal = id;
+  document.querySelectorAll('.fw-petal').forEach(p => p.classList.remove('fw-selected'));
+  document.getElementById('svg-fw-' + id).classList.add('fw-selected');
+  updateFwPanel();
+}
+
+function updateFwPanel() {
+  const p = FW.data[FW.currentPetal];
+  if (!p) return;
+  document.getElementById('fw-empty').style.display = 'none';
+  const content = document.getElementById('fw-content');
+  content.classList.add('visible');
+  const badge = document.getElementById('fw-badge');
+  badge.textContent = p.name[lang];
+  badge.style.cssText = 'background:' + p.color + '18;color:' + p.color + ';border:1px solid ' + p.color + '40;display:inline-flex;align-items:center;padding:4px 11px;border-radius:20px;font-size:0.76rem;font-weight:700;margin-bottom:12px;align-self:flex-start;';
+  document.getElementById('fw-title').textContent = p.name[lang];
+  document.getElementById('fw-phase-tag').textContent = FW.phaseNames[FW.currentPhase][lang];
+  document.getElementById('fw-desc').textContent = p.phases[FW.currentPhase][lang];
+  const noteKey = FW.currentPetal + '_' + FW.currentPhase;
+  const ta = document.getElementById('fw-notes');
+  ta.value = FW.notes[noteKey] || '';
+  ta.placeholder = lang === 'da' ? 'Skriv jeres refleksioner, beslutninger og åbne spørgsmål her...' : 'Write your reflections, decisions and open questions here...';
+  document.getElementById('fw-saved').classList.remove('show');
+  document.getElementById('fw-center-hint').textContent = lang === 'da' ? 'klik et kronblad' : 'click a petal';
+}
+
+function autoSaveFwNote() {
+  if (!FW.currentPetal) return;
+  const key = FW.currentPetal + '_' + FW.currentPhase;
+  FW.notes[key] = document.getElementById('fw-notes').value;
+  try { localStorage.setItem('pastair-notes', JSON.stringify(FW.notes)); } catch(e) {}
+}
+
+function saveFwNote() {
+  autoSaveFwNote();
+  const msg = document.getElementById('fw-saved');
+  msg.classList.add('show');
+  setTimeout(() => msg.classList.remove('show'), 2200);
+}
+
+// Auto-save when user types (debounced)
+document.addEventListener('DOMContentLoaded', () => {
+  const ta = document.getElementById('fw-notes');
+  if (ta) { let t; ta.addEventListener('input', () => { clearTimeout(t); t = setTimeout(autoSaveFwNote, 800); }); }
+});
+
+// ─── LANGUAGE ───
+let lang = 'da';
+function toggleLang() {
+  lang = lang === 'da' ? 'en' : 'da';
+  document.getElementById('langToggle').textContent = lang === 'da' ? 'EN' : 'DA';
+  document.documentElement.lang = lang;
+  document.querySelectorAll('[data-da]').forEach(el => {
+    const val = el.getAttribute('data-' + lang);
+    if (!val) return;
+    if (el.tagName === 'INPUT' || el.tagName === 'BUTTON' || el.tagName === 'A') {
+      if (el.tagName === 'A' && el.children.length === 0) el.textContent = val;
+      else if (el.tagName === 'BUTTON' && el.querySelector('svg')) {
+        // accordion trigger — update only the span
+        const span = el.querySelector('span');
+        if (span) span.textContent = val;
+      } else el.textContent = val;
+    } else {
+      el.innerHTML = val;
+    }
+  });
+  // Re-render framework panel if open
+  if (FW.currentPetal) updateFwPanel();
+  document.getElementById('fw-center-hint').textContent = lang === 'da' ? 'klik et kronblad' : 'click a petal';
+}
+
+// ─── PETAL TABS ───
+function switchTab(btn, petalId, phase) {
+  const card = btn.closest('.petal-card');
+  card.querySelectorAll('.phase-tab').forEach(t => t.classList.remove('active'));
+  card.querySelectorAll('.phase-content').forEach(c => c.classList.remove('active'));
+  btn.classList.add('active');
+  card.querySelector(`.phase-content[data-petal="${petalId}"][data-phase="${phase}"]`).classList.add('active');
+}
+
+// ─── ACCORDION ───
+function toggleAccordion(btn) {
+  const item = btn.closest('.accordion-item');
+  const body = item.querySelector('.accordion-body');
+  const isOpen = body.classList.contains('open');
+  document.querySelectorAll('.accordion-body').forEach(b => b.classList.remove('open'));
+  document.querySelectorAll('.accordion-trigger').forEach(b => b.classList.remove('open'));
+  if (!isOpen) { body.classList.add('open'); btn.classList.add('open'); }
+}
+
+// ─── ROLE TABS ───
+function switchRole(btn, id) {
+  document.querySelectorAll('.role-tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.role-content').forEach(c => c.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('role-' + id).classList.add('active');
+}
+</script>
+</body>
+</html>
